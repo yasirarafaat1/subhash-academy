@@ -38,6 +38,15 @@ export const courses: Course[] = [
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
   },
   {
+    id: "olevel",
+    title: "O'Level",
+    slug: "olevel",
+    duration: "1 Year",
+    fees: "10900 per sem",
+    description: "The ‘O’ Level course is a foundation-level IT certification offered by NIELIT (National Institute of Electronics & Information Technology), formerly known as DOEACC. This course is ideal for students and professionals looking to develop basic programming, networking, and IT skills for job opportunities in the IT industry, government sector, and private companies.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
     id: "bcom",
     title: "Bachelor of Commerce",
     slug: "bcom",

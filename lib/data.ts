@@ -6,7 +6,7 @@ export const courses: Course[] = [
     title: "Bachelor of Computer Application",
     slug: "bca",
     duration: "3 Years",
-    fees: "$4,500 per year",
+    fees: "10900 per sem",
     description: "The Bachelor of Computer Applications (BCA) is a three-year undergraduate degree program that provides students with a strong foundation in computer science and applications. The curriculum covers programming languages, database management, software engineering, web development, and more. Students also gain practical experience through projects and internships, preparing them for careers in the IT industry.",
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
   },
@@ -15,7 +15,7 @@ export const courses: Course[] = [
     title: "Post Graduate Diploma in Computer Application",
     slug: "pgdca",
     duration: "1 Years",
-    fees: "$4,200 per year",
+    fees: "10900 per sem",
     description: "Post Graduate Diploma in Computer Application (PGDCA) program is designed to provide students with a comprehensive understanding of business principles and practices. The curriculum covers areas such as management, marketing, finance, human resources, and entrepreneurship. Through case studies, projects, and internships, students develop the skills needed to succeed in the corporate world and become effective business leaders.",
     image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop"
   },
@@ -24,7 +24,7 @@ export const courses: Course[] = [
     title: "Advance Diploma in Computer Application",
     slug: "adca",
     duration: "1 Years",
-    fees: "$3,800 per year",
+    fees: "10900 per sem",
     description: "Advance Diploma in Computer Application (ADCA) program offers a rigorous education in scientific principles and methodologies. Students can specialize in various fields such as Physics, Chemistry, Biology, Mathematics, or Computer Science. The curriculum combines theoretical knowledge with practical laboratory work, research projects, and field studies. Graduates are prepared for careers in research, education, industry, or further academic pursuits.",
     image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop"
   },
@@ -32,9 +32,36 @@ export const courses: Course[] = [
     id: "dca",
     title: "Diploma in Computer Application",
     slug: "dca",
+    duration: "1 Year",
+    fees: "10900 per sem",
+    description: "The Diploma in Computer Applications (DCA) is a short-term diploma course designed to provide foundational knowledge of computer applications. It is ideal for students, professionals, and individuals looking to enhance their computer skills for career opportunities in IT and related fields.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: "bcom",
+    title: "Bachelor of Commerce",
+    slug: "bcom",
+    duration: "3 Years",
+    fees: "10900 per sem",
+    description: "The Bachelor of Commerce (B.Com) is a three-year undergraduate degree program focused on business, finance, accounting, and commerce-related subjects. It is one of the most popular courses for students interested in pursuing careers in business, finance, banking, and corporate sectors.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: "mcom",
+    title: "Master of Commerce",
+    slug: "mcom",
     duration: "2 Years",
-    fees: "$6,500 per year",
-    description: "The Master of Business Administration (MBA) program is designed for professionals seeking to enhance their management skills and advance their careers. The curriculum covers advanced topics in business strategy, leadership, finance, marketing, operations, and organizational behavior. Through case studies, simulations, and real-world projects, students develop the analytical and leadership skills needed to excel in today's competitive business environment.",
+    fees: "10900 per sem",
+    description: "The Master of Commerce (M.Com) is a postgraduate degree program that provides advanced knowledge in commerce, finance, accounting, and business management. It is an excellent choice for students who want to build expertise in financial analysis, taxation, banking, or corporate governance.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    id: "mca",
+    title: "Master in Computer Application",
+    slug: "mca",
+    duration: "2 Years",
+    fees: "10900 per sem",
+    description: "The Master of Computer Applications (MCA) is a postgraduate degree program in computer science and information technology, designed to provide comprehensive knowledge of computer applications, software development, and IT management. It prepares students for advanced careers in the IT industry and research fields.",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
   }
 ];
@@ -49,13 +76,13 @@ export const facilities: Facility[] = [
   {
     id: "computer-labs",
     title: "Computer Laboratories",
-    description: "Our computer labs are equipped with the latest hardware and software to support teaching, learning, and research. Each lab has high-speed internet connectivity and is maintained by skilled technical staff to ensure smooth operation.",
+    description: "Well equipped with more than 400 Pentium IV computers & other computing resources to cater to academic needs of the Institute. All computers are networked through Novel, NT & Linux along the with Internet server. The state-of-the-art centre provides hands on experience to the user & always keeps pace with the advancement of technology",
     image: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: "lecturehalls",
     title: "Lecture Halls",
-    description: "We offer comprehensive sports facilities including a gymnasium, indoor sports complex, and outdoor playing fields. Students can participate in various sports such as basketball, volleyball, cricket, football, and athletics.",
+    description: "3 well designed Lecture Halls with a standard sitting capacity of 70 students at a time. The lecture hall is equipped with 6 fans and other modern gadgets.",
     image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2076&auto=format&fit=crop"
   },
   // {

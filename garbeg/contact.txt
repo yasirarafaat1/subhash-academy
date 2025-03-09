@@ -7,7 +7,6 @@ import { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from '@/lib/firebase';
 import toast, { Toaster } from 'react-hot-toast';
-import emailjs from '@emailjs/browser';
 
 interface PageProps {
   params: { [key: string]: string | string[] | undefined }
@@ -33,24 +32,6 @@ export default function ContactPage({ params, searchParams }: PageProps) {
         ...formData,
         timestamp: serverTimestamp()
       });
-
-      await emailjs.send(
-        "service_y8yqekm",
-        "template_d6tyoc6",
-        {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message
-        },
-        "YIDbPt-jS0NTrTnlc"
-      ).then(() => {
-        console.log("Email sent successfully!");
-      }).catch((error) => {
-        console.error("EmailJS Error:", error);
-        toast.error("Failed to send email. Please check your configuration.");
-      });
-
 
       setFormData({ name: '', email: '', phone: '', message: '' });
       toast.success("Message sent successfully! We'll get back to you soon.", {
@@ -126,7 +107,30 @@ export default function ContactPage({ params, searchParams }: PageProps) {
                   </p>
                 </div>
               </div>
+
+              <div className="flex items-start">
+                <div className="bg-primary/10 p-3 rounded-full mr-4">
+                  <Clock className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1">Office Hours</h3>
+                  <p className="text-muted-foreground">
+                    Monday - Saturday: 10:00 AM - 3:00 PM<br />
+                    Sunday: Closed
+                  </p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div className="bg-card rounded-lg p-8 shadow-sm">
+            <h2 className="text-2xl font-bold mb-6">Connect With Us</h2>
+            <p className="text-muted-foreground mb-6">
+              For admission inquiries, please fill out our admission form. We'll get back to you as soon as possible.
+            </p>
+            <Button size="lg" asChild>
+              <Link href="/admission-enquiry">Admission Enquiry</Link>
+            </Button>
           </div>
         </div>
 
@@ -141,9 +145,10 @@ export default function ContactPage({ params, searchParams }: PageProps) {
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
               required
+              aria-label="Name"
             />
 
-            <input
+            <input 
               type="email"
               placeholder="Email"
               name="email"
@@ -151,6 +156,7 @@ export default function ContactPage({ params, searchParams }: PageProps) {
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
               required
+              aria-label="Email"
             />
 
             <input
@@ -161,6 +167,7 @@ export default function ContactPage({ params, searchParams }: PageProps) {
               onChange={handleChange}
               className="w-full p-3 border rounded-lg"
               required
+              aria-label="Phone Number"
             />
 
             <textarea
@@ -171,9 +178,10 @@ export default function ContactPage({ params, searchParams }: PageProps) {
               className="w-full p-3 border rounded-lg"
               required
               rows={4}
+              aria-label="Message"
             />
 
-            <Button
+            <Button 
               type="submit"
               disabled={isSubmitting}
               className="w-full"

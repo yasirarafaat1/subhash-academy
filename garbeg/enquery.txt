@@ -6,8 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import toast, { Toaster } from "react-hot-toast";
-import emailjs from "@emailjs/browser";
+import toast, { Toaster } from 'react-hot-toast';
 import {
   Form,
   FormControl,
@@ -50,18 +49,6 @@ export default function EnquiryForm() {
         ...data,
         timestamp: serverTimestamp(),
       });
-
-      await emailjs.send(
-        "service_y8yqekm", 
-        "template_d6tyoc6", 
-        {
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          message: data.message,
-        }, 
-        "YIDbPt-jS0NTrTnlc"
-      );
 
       form.reset();
       toast.success("Enquiry submitted successfully!");

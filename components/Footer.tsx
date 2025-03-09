@@ -59,6 +59,9 @@ export default function Footer() {
               <li>
                 <Link href="/privacy-policy" className="text-muted-foreground hover:text-primary">Privacy Policy</Link>
               </li>
+              <li>
+                <Link href="/dataPanel" className="text-muted-foreground hover:text-primary">Admin</Link>
+              </li>
             </ul>
           </div>
 

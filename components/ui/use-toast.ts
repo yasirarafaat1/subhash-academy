@@ -1,4 +1,7 @@
-// Shadcn/ui toast hook
-import { useToast as useToastOriginal } from "@/components/ui/toast";
+"use client";
 
-export const useToast = useToastOriginal;
+import { toast } from "sonner"; // Import Sonner's toast function
+
+export function useToast() {
+  return { toast };
+}

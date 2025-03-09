@@ -1,16 +1,14 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  authDomain: "institution-website.firebaseapp.com",
-  projectId: "institution-website",
-  storageBucket: "institution-website.appspot.com",
-  messagingSenderId: "xxxxxxxxxxxx",
-  appId: "1:xxxxxxxxxxxx:web:xxxxxxxxxxxxxxxxxxxxxxxx"
+  apiKey: "AIzaSyBBaAf7tjJDpAq9RfDCP_aVfsV0V13nP7o",
+  authDomain: "digitaladbirdportfolio.firebaseapp.com",
+  projectId: "digitaladbirdportfolio",
+  storageBucket: "digitaladbirdportfolio.appspot.com",
+  messagingSenderId: "333911474607",
+  appId: "1:333911474607:web:eb513566a0e35b8098ef5a",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 export const db = getFirestore(app);

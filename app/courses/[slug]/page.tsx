@@ -2,11 +2,12 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Clock, DollarSign } from "lucide-react";
-import { courses } from "@/lib/data";
+import { Clock, DollarSign, GraduationCap, IndianRupee } from "lucide-react";
+import { courseDetails, getCourseBySlug, getRelatedCourses,} from "@/lib/utils";
+import { Course } from "@/lib/types";
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  const course = courses.find((course) => course.slug === params.slug);
+  const course = getCourseBySlug(params.slug);
   
   if (!course) {
     return {
@@ -21,20 +22,22 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 }
 
 export function generateStaticParams() {
-  return courses.map((course) => ({
-    slug: course.slug,
+  return Object.keys(courseDetails).map((slug) => ({
+    slug,
   }));
 }
 
 export default function CoursePage({ params }: { params: { slug: string } }) {
-  const course = courses.find((course) => course.slug === params.slug);
+  const course = getCourseBySlug(params.slug);
   
   if (!course) {
     notFound();
   }
+
+  const relatedCourses = getRelatedCourses(params.slug);
   
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="max-w-7xl mx-auto mt-14 px-4 sm:px-6 lg:px-8 py-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-xl">
           <Image
@@ -53,8 +56,12 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
               <Clock className="h-5 w-5 mr-2 text-primary" />
               <span>{course.duration}</span>
             </div>
+              <div className="flex items-center bg-muted px-4 py-2 rounded-md">
+                <GraduationCap className="h-5 w-5 mr-2 text-primary" />
+                <span>{course.mode}</span>
+              </div>
             <div className="flex items-center bg-muted px-4 py-2 rounded-md">
-              <DollarSign className="h-5 w-5 mr-2 text-primary" />
+              <IndianRupee className="h-5 w-5 mr-2 text-primary" />
               <span>{course.fees}</span>
             </div>
           </div>
@@ -74,41 +81,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-6">Course Structure</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              year: "Year 1",
-              subjects: [
-                "Introduction to Programming",
-                "Computer Organization",
-                "Mathematics for Computing",
-                "Digital Logic",
-                "Communication Skills",
-                "Environmental Studies"
-              ]
-            },
-            {
-              year: "Year 2",
-              subjects: [
-                "Data Structures and Algorithms",
-                "Database Management Systems",
-                "Operating Systems",
-                "Web Technologies",
-                "Software Engineering",
-                "Computer Networks"
-              ]
-            },
-            {
-              year: "Year 3",
-              subjects: [
-                "Artificial Intelligence",
-                "Cloud Computing",
-                "Mobile Application Development",
-                "Information Security",
-                "Project Work",
-                "Professional Ethics"
-              ]
-            }
-          ].map((year, index) => (
+          {course.structure.years.map((year, index) => (
             <div key={index} className="bg-card rounded-lg shadow-sm overflow-hidden">
               <div className="bg-primary text-primary-foreground p-4">
                 <h3 className="text-xl font-semibold">{year.year}</h3>
@@ -136,17 +109,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
             Graduates of this program can pursue careers in various fields including:
           </p>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              "Software Developer",
-              "Web Developer",
-              "Database Administrator",
-              "System Analyst",
-              "Network Administrator",
-              "IT Consultant",
-              "Project Manager",
-              "Quality Assurance Engineer",
-              "Technical Support Specialist"
-            ].map((career, index) => (
+            {course.structure.careerOpportunities.map((career, index) => (
               <li key={index} className="flex items-center">
                 <svg className="h-5 w-5 text-primary mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -162,33 +125,30 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-6">Related Courses</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {courses
-            .filter((c) => c.id !== course.id)
-            .slice(0, 3)
-            .map((relatedCourse) => (
-              <div key={relatedCourse.id} className="bg-card rounded-lg shadow-sm overflow-hidden">
-                <div className="relative h-48">
-                  <Image
-                    src={relatedCourse.image}
-                    alt={relatedCourse.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">{relatedCourse.title}</h3>
-                  <div className="flex items-center text-muted-foreground mb-4">
-                    <Clock className="h-4 w-4 mr-1" />
-                    <span className="mr-3">{relatedCourse.duration}</span>
-                    <DollarSign className="h-4 w-4 mr-1" />
-                    <span>{relatedCourse.fees}</span>
-                  </div>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link href={`/courses/${relatedCourse.slug}`}>View Details</Link>
-                  </Button>
-                </div>
+          {relatedCourses.map((relatedCourse) => (
+            <div key={relatedCourse.id} className="bg-card rounded-lg shadow-sm overflow-hidden">
+              <div className="relative h-48">
+                <Image
+                  src={relatedCourse.image}
+                  alt={relatedCourse.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
-            ))}
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-2">{relatedCourse.title}</h3>
+                <div className="flex items-center text-muted-foreground mb-4">
+                  <Clock className="h-4 w-4 mr-1" />
+                  <span className="mr-3">{relatedCourse.duration}</span>
+                  <DollarSign className="h-4 w-4 mr-1" />
+                  <span>{relatedCourse.fees}</span>
+                </div>
+                <Button variant="outline" className="w-full" asChild>
+                  <Link href={`/courses/${relatedCourse.slug}`}>View Details</Link>
+                </Button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       

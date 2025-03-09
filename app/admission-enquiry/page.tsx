@@ -147,15 +147,6 @@ export default function AdmissionEnquiryPage() {
               </li>
             </ul>
           </div>
-
-          <div className="relative h-[300px] rounded-lg overflow-hidden shadow-xl">
-            <Image
-              src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2071&auto=format&fit=crop"
-              alt="University Campus"
-              fill
-              className="object-cover"
-            />
-          </div>
         </div>
       </div>
     </div>

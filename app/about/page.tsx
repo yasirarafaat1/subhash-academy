@@ -11,7 +11,8 @@ export default function AboutPage() {
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">About Subhash Academy </h1>
         <p className="text-muted-foreground max-w-3xl mx-auto">
-          A premier educational institution committed to excellence in education and research.
+          It is an All India Council of Technical Education (AICTE) approved
+          Institute.
         </p>
       </div>
 
@@ -19,7 +20,7 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
         <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
           <Image
-            src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2072&auto=format&fit=crop"
+            src="/assets/front.jpg"
             alt="University Campus"
             fill
             className="object-cover"
@@ -28,16 +29,36 @@ export default function AboutPage() {
         <div>
           <h2 className="text-3xl font-bold mb-6">Our Story</h2>
           <p className="text-muted-foreground mb-4">
-            Subhash Academy (College of IT & Management) is leading and prestigious institution
-            specializing in professional courses such as Computer Management and other disciplines. It is one of
-            the largest college for professional education in Kannauj and Farrukhabad districts.The college is
-            affiliated with <span className="font-[700]">Makhanlal Chaturvedi National University of Journalism & Communication, Bhopal, </span> a renowned institution in Asia.
+            <span className="font-[700]">
+              Subhash Academy (College of IT & Management) is an All India
+              Council of Technical Education (AICTE) approved institute,
+            </span>{" "}
+            ensuring that its programs meet the highest standards of technical
+            and professional education set by the All India Council for
+            Technical Education. With state-of-the-art infrastructure,
+            experienced faculty, and a commitment to innovation, the college
+            strives to provide a dynamic and enriching learning environment that
+            empowers students to succeed in their careers.
           </p>
           <p className="text-muted-foreground mb-4">
-            Over the years, we have established ourselves as a center of academic excellence, research, and innovation. Our commitment to providing quality education has earned us recognition and accreditation from leading educational bodies.
+            It is a leading and
+            prestigious institution specializing in professional courses such as
+            Computer Management and other disciplines. Recognized for its
+            excellence in education, the academy is one of the largest colleges
+            for professional education in the Kannauj and Farrukhabad districts.
+            It is dedicated to fostering academic growth, skill development, and
+            career-oriented learning for students aspiring to excel in the
+            fields of IT, management, and beyond. The college is
+            affiliated with{" "}
+            <span className="font-[700]">
+              Makhanlal Chaturvedi National University of Journalism &
+              Communication, Bhopal,{" "}
+            </span>{" "}
+            a renowned institution in India known for its
+            academic excellence and industry-aligned curriculum.
           </p>
           <p className="text-muted-foreground">
-            Today, SA stands as a symbol of educational excellence, with state-of-the-art infrastructure, experienced faculty, and a diverse student community from across the globe. We continue to evolve and adapt to the changing educational landscape while staying true to our core values and mission.
+            Today, <span className="font-[700]">SA is a one of the college in district Kannauj which is AICTE(1-44512605107) approved.</span>We continue to evolve and adapt to the changing educational landscape while staying true to our core values and mission.
           </p>
         </div>
       </div>
@@ -76,22 +97,22 @@ export default function AboutPage() {
             {
               name: "Devesh Kumar Saxena",
               position: "Director",
-              image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2149&auto=format&fit=crop"
+              image: "/assets/teachers/director.webp"
             },
             {
               name: "Naseem Zama Khan",
               position: "Execitive Manager",
-              image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2076&auto=format&fit=crop"
+              image: "/assets/teachers/Naseem Zama Khan Sir.jpg"
             },
             {
               name: "Mayank Saxena",
               position: "Acountant",
-              image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
+              image: "/assets/teachers/mayank_saxena_sir.jpg"
             },
             {
               name: "Mahboob Siddiqui",
               position: "HOD",
-              image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
+              image: "/assets/teachers/Mahboob_Siddiqui_Sir.jpg"
             }
           ].map((leader, index) => (
             <div key={index} className="bg-card rounded-lg overflow-hidden shadow-sm">
@@ -167,7 +188,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 gap-4">
             <div className="relative h-48 rounded-lg overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=2070&auto=format&fit=crop"
+                src="/assets/gallery/farewell.jpg"
                 alt="Campus Life"
                 fill
                 className="object-cover"
@@ -175,23 +196,23 @@ export default function AboutPage() {
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+                src="/assets/gallery/img2.jpg"
                 alt="Campus Life"
                 fill
                 className="object-cover"
-              />
+                />
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop"
+                src="/assets/gallery/national_ocassion.jpg"
                 alt="Campus Life"
                 fill
                 className="object-cover"
-              />
+                />
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2071&auto=format&fit=crop"
+                src="/assets/gallery/fresher.jpg"
                 alt="Campus Life"
                 fill
                 className="object-cover"

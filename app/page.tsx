@@ -13,7 +13,7 @@ export default function Home() {
       <section className="relative h-[600px] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2071&auto=format&fit=crop"
+            src="/assets/front.jpg"
             alt="University Campus"
             fill
             className="object-cover brightness-50"
@@ -25,7 +25,7 @@ export default function Home() {
             Shaping Tomorrow's Leaders Today
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Subhash Academy offers world-class education with state-of-the-art facilities and expert faculty to nurture the leaders of tomorrow.
+            Subhash Academy is an All India Council of Technical Education (AICTE) approved Institute in Kannauj.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button size="lg" asChild>
@@ -45,10 +45,31 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-bold mb-6">About Subhash Academy</h2>
               <p className="text-muted-foreground mb-4">
-              Subhash Academy (College of IT & Management) is leading and prestigious institution specializing in professional courses such as Computer Management and other disciplines. It is one of the largest college for professional education in Kannauj and Farrukhabad districts.The college is affiliated with <span className="font-[700]">Makhanlal Chaturvedi National University of Journalism & Communication, Bhopal, </span> a renowned institution in Asia.
+                <span className="font-[700]">Subhash Academy (College of IT & Management) is an All India
+                  Council of Technical Education (AICTE) approved institute,</span>
+                ensuring that its programs meet the highest standards of technical
+                and professional education set by the All India Council for
+                Technical Education. With state-of-the-art infrastructure,
+                experienced faculty, and a commitment to innovation, the college
+                strives to provide a dynamic and enriching learning environment that
+                empowers students to succeed in their careers.
               </p>
               <p className="text-muted-foreground mb-4">
-                With state-of-the-art infrastructure, experienced faculty, and innovative teaching methodologies, we strive to create an environment that fosters creativity, critical thinking, and practical skills. Our curriculum is designed to meet industry standards and equip students with the knowledge and skills needed to excel in their chosen fields.
+                It is a leading and
+                prestigious institution specializing in professional courses such as
+                Computer Management and other disciplines. Recognized for its
+                excellence in education, the academy is one of the largest colleges
+                for professional education in the Kannauj and Farrukhabad districts.
+                It is dedicated to fostering academic growth, skill development, and
+                career-oriented learning for students aspiring to excel in the
+                fields of IT, management, and beyond. The college is
+                affiliated with{" "}
+                <span className="font-[700]">
+                  Makhanlal Chaturvedi National University of Journalism &
+                  Communication, Bhopal,{" "}
+                </span>{" "}
+                a renowned institution in India known for its
+                academic excellence and industry-aligned curriculum.
               </p>
               <p className="text-muted-foreground mb-6">
                 We believe in nurturing not just academic excellence but also character, ethics, and social responsibility. Our graduates are known for their technical expertise, leadership qualities, and commitment to making a positive impact on society.
@@ -59,7 +80,7 @@ export default function Home() {
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop"
+                src="/assets/front.jpg"
                 alt="University Building"
                 fill
                 className="object-cover"
@@ -83,11 +104,11 @@ export default function Home() {
               <CourseCard key={course.id} course={course} />
             ))}
           </div>
-          <div className="text-center mt-10">
+          {/* <div className="text-center mt-10">
             <Button size="lg" asChild>
               <Link href="/courses/bca">View All Courses</Link>
             </Button>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -98,7 +119,7 @@ export default function Home() {
             <div className="md:col-span-1">
               <div className="relative h-[300px] w-full md:h-[400px] rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2149&auto=format&fit=crop"
+                  src="/assets/teachers/director.webp"
                   alt="Director"
                   fill
                   className="object-cover"
@@ -108,7 +129,7 @@ export default function Home() {
             <div className="md:col-span-2">
               <h2 className="text-3xl font-bold mb-6">Director's Message</h2>
               <blockquote className="text-muted-foreground mb-6 italic">
-              My vision to push this institution to the Zenith of excellence by providing best infrastructure and class teaching facilities to aspiring students and transforming them the world class techno professionals. Development of infrastructure in rural area with standard educational input is very difficult for three reasons.One it is not economically viable. Second-Even after handsomme salary payment, good teachers are not available and Thirdly-children from good family background in sufficient number are not available. Even after all these hardship we have been considerably successful to implement good professionals courses to the rural children with quality education. I am thankful to System Manager, teachers & guardians for thier co-operation to make the dream true. My good wishes for Swaraj dedicated father late Shri Juagal Kishore Saxena, a freedom fighter, social worker & ex-chairperson of the society.
+                My vision to push this institution to the Zenith of excellence by providing best infrastructure and class teaching facilities to aspiring students and transforming them the world class techno professionals. Development of infrastructure in rural area with standard educational input is very difficult for three reasons.One it is not economically viable. Second-Even after handsomme salary payment, good teachers are not available and Thirdly-children from good family background in sufficient number are not available. Even after all these hardship we have been considerably successful to implement good professionals courses to the rural children with quality education. I am thankful to System Manager, teachers & guardians for thier co-operation to make the dream true. My good wishes for Swaraj dedicated father late Shri Juagal Kishore Saxena, a freedom fighter, social worker & ex-chairperson of the society.
               </blockquote>
               <p className="text-muted-foreground mb-6">
                 We strive to create an environment that encourages innovation, critical thinking, and practical application of knowledge. Our faculty members are dedicated to guiding students on their academic journey and helping them realize their full potential. Together, we are building a community of lifelong learners and future leaders.

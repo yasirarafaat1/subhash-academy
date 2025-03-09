@@ -97,7 +97,7 @@ export default function ContactPage({ params, searchParams }: PageProps) {
                   <h3 className="font-semibold mb-1">Address</h3>
                   <p className="text-muted-foreground">
                     Awas Vikas Colony,<br />
-                    Chhibramau, Uttar Pradesh, 209721<br />
+                    Chhibramau, Kannauj, <br /> Uttar Pradesh, 209721<br />
                     India
                   </p>
                 </div>
@@ -111,6 +111,7 @@ export default function ContactPage({ params, searchParams }: PageProps) {
                   <h3 className="font-semibold mb-1">Phone</h3>
                   <p className="text-muted-foreground">
                     Main: +91 9335 9390 00<br />
+                    Office: +91 7275 0240 00<br />
                   </p>
                 </div>
               </div>

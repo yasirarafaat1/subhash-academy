@@ -20,7 +20,7 @@ export default function InfrastructurePage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
         <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
           <Image
-            src="/assets/front.jpg"
+            src="/assets/front2.jpeg"
             alt="University Campus"
             fill
             className="object-cover"

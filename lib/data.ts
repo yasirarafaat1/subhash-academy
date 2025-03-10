@@ -107,7 +107,7 @@ export const facilities: Facility[] = [
     id: "multimedia",
     title: "MultiMedia",
     description: "Our modern multimedia is equipped with advanced audio-visual systems and can accommodate up to 500 people. It hosts various events such as seminars, conferences, cultural programs, and guest lectures.",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop"
+    image: "/assets/infrastructure/img3.jpg"
   }
 ];
 
@@ -201,7 +201,7 @@ export const galleryImages: GalleryImage[] = [
 export const directorMessage = {
   name: "Devesh Kumar Saxena",
   position: "Director, Subhash Academy",
-  image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2149&auto=format&fit=crop",
+  image: "/assets/teachers/director.webp",
   message: `
     Dear Students, Parents, and Visitors,
 

@@ -13,7 +13,7 @@ export default function Home() {
       <section className="relative h-[600px] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/front.jpg"
+            src="/assets/front1.jpeg"
             alt="University Campus"
             fill
             className="object-cover brightness-50"
@@ -80,7 +80,7 @@ export default function Home() {
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/assets/front.jpg"
+                src="/assets/front2.jpeg"
                 alt="University Building"
                 fill
                 className="object-cover"

@@ -140,7 +140,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
                 <div className="flex items-center text-muted-foreground mb-4">
                   <Clock className="h-4 w-4 mr-1" />
                   <span className="mr-3">{relatedCourse.duration}</span>
-                  <DollarSign className="h-4 w-4 mr-1" />
+                  <IndianRupee className="h-4 w-4 mr-1" />
                   <span>{relatedCourse.fees}</span>
                 </div>
                 <Button variant="outline" className="w-full" asChild>

@@ -12,7 +12,7 @@ export const courseDetails = {
     title: "Bachelor of Computer Applications (BCA)",
     description: "A comprehensive three-year undergraduate program designed to create skilled IT professionals. The course covers programming, software development, database management, and modern computing technologies.",
     duration: "3 Years",
-    mode: "Regular/Distance",
+    mode: "Regular",
     fees: "10,900/Sem",
     image: "/assets/courses/bca.webp",
     structure: {
@@ -201,6 +201,64 @@ export const courseDetails = {
         "Technical Support Specialist",
         "Digital Marketing Executive",
         "IT Project Coordinator"
+      ]
+    }
+  },
+  bca_distance: {
+    id: "bca-distance",
+    slug: "bca-distance",
+    title: "Bachelor of Computer Applications (BCA)",
+    description: "A comprehensive three-year undergraduate program designed to create skilled IT professionals. The course covers programming, software development, database management, and modern computing technologies.",
+    duration: "3 Years",
+    mode: "Distance",
+    fees: "40,000/Sem",
+    image: "/assets/courses/bca.webp",
+    structure: {
+      years: [
+        {
+          year: "Year 1",
+          subjects: [
+            "Introduction to Programming",
+            "Computer Organization",
+            "Mathematics for Computing",
+            "Digital Logic",
+            "Communication Skills",
+            "Environmental Studies"
+          ]
+        },
+        {
+          year: "Year 2",
+          subjects: [
+            "Data Structures and Algorithms",
+            "Database Management Systems",
+            "Operating Systems",
+            "Web Technologies",
+            "Software Engineering",
+            "Computer Networks"
+          ]
+        },
+        {
+          year: "Year 3",
+          subjects: [
+            "Artificial Intelligence",
+            "Cloud Computing",
+            "Mobile Application Development",
+            "Information Security",
+            "Project Work",
+            "Professional Ethics"
+          ]
+        }
+      ],
+      careerOpportunities: [
+        "Software Developer",
+        "Web Developer",
+        "Database Administrator",
+        "System Analyst",
+        "Network Administrator",
+        "IT Consultant",
+        "Project Manager",
+        "Quality Assurance Engineer",
+        "Technical Support Specialist"
       ]
     }
   },

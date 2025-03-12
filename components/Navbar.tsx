@@ -25,6 +25,7 @@ const courses = [
   { name: "PGDCA", slug: "pgdca" },
   { name: "ADCA", slug: "adca" },
   { name: "DCA", slug: "dca" },
+  { name: "BCA (Dist.)", slug: "bca_distance" },
   { name: "B.Com", slug: "bcom" },
   { name: "M.Com", slug: "mcom" },
   { name: "MCA", slug: "mca" },

@@ -9,8 +9,9 @@ export default function Footer() {
     { name: "ADCA", path: "/courses/adca" },
     { name: "DCA", path: "/courses/dca" },
   ];
-
+  
   const distanceCourses = [
+    { name: "BCA", path: "/courses/bca_distance" },
     { name: "B.Com", path: "/courses/bcom" },
     { name: "M.Com", path: "/courses/mcom" },
     { name: "MCA", path: "/courses/mca" },

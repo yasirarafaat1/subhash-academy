@@ -147,7 +147,7 @@ export const facilities: Facility[] = [
     id: "multimedia",
     title: "MultiMedia",
     description: "Our modern multimedia is equipped with advanced audio-visual systems and can accommodate up to 500 people. It hosts various events such as seminars, conferences, cultural programs, and guest lectures.",
-    image: "/assets/infrastructure/multimedia.jpg"
+    image: "/assets/infrastructure/multimedia.JPG"
   }
 ];
 

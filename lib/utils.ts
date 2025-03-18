@@ -211,7 +211,7 @@ export const courseDetails = {
     description: "A comprehensive three-year undergraduate program designed to create skilled IT professionals. The course covers programming, software development, database management, and modern computing technologies.",
     duration: "3 Years",
     mode: "Distance",
-    fees: "40,000/Sem",
+    fees: "12,800/Sem",
     image: "/assets/courses/bca.webp",
     structure: {
       years: [
@@ -262,6 +262,66 @@ export const courseDetails = {
       ]
     }
   },
+  ba: {
+    id: "ba",
+    slug: "ba",
+    title: "Bachelor of Art",
+    description: "A Bachelor of Arts (BA) is a popular undergraduate degree focusing on liberal arts and humanities, offering a broad education with various specializations and career paths in fields like education, social work, and more.",
+    duration: "3 Years",
+    mode: "Regular",
+    fees: "5,500/Sem",
+    image: "/assets/courses/ba.webp",
+    structure: {
+      years: [
+        {
+          year: "Year 1",
+          subjects: [
+            "English Language",
+            "Hindi/Regional Language",
+            "Environmental Stu,dies",
+            "Introduction to Political Science",
+            "History of India (Ancient Period & Medieval Period)",
+            "Introduction to Sociology",
+            "Basics of Computers"
+          ]
+        },
+        {
+          year: "Year 2",
+          subjects: [
+           "English Language or Communication Skills",
+          "Hindi/Regional Language",
+          "Comparative Government and Politics",
+          "History of Modern India (1757–1947)",
+          "Sociology of Indian Society",
+          "Computer Applications",
+          "Data analysis or Public Speaking"
+          ]
+        },
+        {
+          year: "Year 3",
+          subjects: [
+            "General Knowledge and Current Affairs",
+            "International Relations or Public Administration",
+            "Contemporary World History (Post-1945)",
+            "Sociology of Development or Gender Studies",
+            "Project Work / Dissertation",
+            "Fieldwork or Internship",
+          ]
+        }
+      ],
+      careerOpportunities: [
+        "Software Developer",
+        "Web Developer",
+        "Database Administrator",
+        "System Analyst",
+        "Network Administrator",
+        "IT Consultant",
+        "Project Manager",
+        "Quality Assurance Engineer",
+        "Technical Support Specialist"
+      ]
+    }
+  },
   bcom: {
     id: "bcom",
     slug: "bcom",
@@ -269,7 +329,7 @@ export const courseDetails = {
     description: "A three-year undergraduate program that provides comprehensive knowledge of commerce, accounting, finance, and business management. Ideal for students pursuing careers in finance and business.",
     duration: "3 Years",
     mode: "Distance",
-    fees: "25000/Sem",
+    fees: "6,500/Sem",
     image: "/assets/courses/bcom.webp",
     structure: {
       years: [
@@ -319,6 +379,155 @@ export const courseDetails = {
       ]
     }
   },
+  ma: {
+    id: "ma",
+    slug: "ma",
+    title: "Master of Art",
+    description: "A two-year postgraduate program offering advanced knowledge in commerce, finance, and business management. Designed for students seeking expertise in financial management and advanced business practices.",
+    duration: "2 Years",
+    mode: "Distance",
+    fees: "9,000/Sem",
+    image: "/assets/courses/ma.webp",
+    structure: {
+      years: [
+        {
+          year: "Year 1",
+          subjects: [
+             "Introduction to Advanced Theories and Concepts",
+            " Research Methodology and Techniques",
+            "Social and Political Theories",
+            " Literature, History, or Subject-Specific Topics",
+            "Specialization-specific electives",
+           "Academic Writing or Data Analysis (varies by university)"
+          ]
+        },
+        {
+          year: "Year 2",
+          subjects: [
+            "Advanced Cost & Management Accounting",
+            "International Business & Trade",
+            "Financial Management & Investment Analysis",
+            "Taxation Laws (Direct & Indirect Taxes)",
+            "Entrepreneurship & Small Business Management",
+            "Research Methodology & Dissertation"
+          ]
+        }
+      ],
+      careerOpportunities: [
+        "Financial Manager",
+        "Investment Analyst",
+        "Corporate Consultant",
+        "Research Analyst",
+        "Academic Professor",
+        "Financial Controller",
+        "Business Consultant",
+        "Portfolio Manager"
+      ]
+    }
+  },
+  msw:{
+    id: "msw",
+    slug: "msw",
+    title: "Master of Social Work",
+    description: "The Master of Social Work (MSW) is a 2-year postgraduate program divided into 2 academic years. The syllabus covers core subjects, practical fieldwork, research, and electives related to social work, human rights, social justice, and welfare policies.",
+    duration: "2 Years",
+    mode: "Distance",
+    fees: "9,000/Sem",
+    image: "/assets/courses/msw.webp",
+    structure: {
+      years: [
+        {
+          year: "Year 1",
+          subjects: [
+                         "Introduction to Social Work",
+            "Social Work Methods",
+            "Sciology and Economics for Social Work",
+            "Human Growth and Development",
+             "Research Methodology",
+             "Field Work Practicum",
+             "Hands-on experience in social work practic",
+             "Communication Skills",
+             "Report Writing and Documentation",
+          ]
+        },
+      {
+          year: "Year 2",
+          subjects: [
+            "Social Policy and Legislation",
+          "Social Work Administration",
+          "Psychiatric Social Work or Medical Social Work",
+          "Human Rights and Social Justice",
+          "Gender and Development",
+          "Field Work Practicum",
+          "Dissertation/Research Project",
+          "Community Development",
+          "HR Management",
+          "Family and Child Welfare"
+          ]
+        }
+      ],
+      careerOpportunities: [
+        "Financial Manager",
+        "Investment Analyst",
+        "Corporate Consultant",
+        "Research Analyst",
+        "Academic Professor",
+        "Financial Controller",
+        "Business Consultant",
+        "Portfolio Manager"
+      ]
+    }
+  },
+  msc:{
+    id: "msc",
+    slug: "msc",
+    title: "Master of Science (Maths)",
+    description: "The Master of Science in Mathematics (MSc Maths) is a 2-year postgraduate program divided into 2 academic years. The syllabus covers core mathematics subjects, electives, and research-based projects. It focuses on advanced mathematical theories, problem-solving, and analytical skills.",
+    duration: "2 Years",
+    mode: "Distance",
+    fees: "10,000/Sem",
+    image: "/assets/courses/msc.webp",
+    structure: {
+      years: [
+        {
+          year: "Year 1",
+          subjects: [
+           "Algebra",
+          "Real Analysis",
+          "Differential Equations",
+          "Linear Algebra",
+          "Mathematical Modelling",
+          "Probability and Statistics",
+          "Computational Mathematics",
+          "Numerical Methods Lab"
+          ]
+        },
+      {
+          year: "Year 2",
+          subjects: [
+            "Complex Analysis",
+          "Topology",
+          "Functional Analysis",
+          "Numerical Analysis",
+          "Operations Research",
+          "Graph Theory",
+          "Dissertation/Project Work",
+          "Presentation and viva."
+          ]
+        }
+      ],
+      careerOpportunities: [
+        "Financial Manager",
+        "Investment Analyst",
+        "Corporate Consultant",
+        "Research Analyst",
+        "Academic Professor",
+        "Financial Controller",
+        "Business Consultant",
+        "Portfolio Manager"
+      ]
+    }
+  },
   mcom: {
     id: "mcom",
     slug: "mcom",
@@ -326,7 +535,7 @@ export const courseDetails = {
     description: "A two-year postgraduate program offering advanced knowledge in commerce, finance, and business management. Designed for students seeking expertise in financial management and advanced business practices.",
     duration: "2 Years",
     mode: "Distance",
-    fees: "25,000/Sem",
+    fees: "9,000/Sem",
     image: "/assets/courses/mcom.webp",
     structure: {
       years: [
@@ -372,7 +581,7 @@ export const courseDetails = {
     description: "A two-year postgraduate program offering advanced knowledge in commerce, finance, and business management. Designed for students seeking expertise in financial management and advanced business practices.",
     duration: "2 Years",
     mode: "Distance",
-    fees: "90,000/Sem",
+    fees: "17,000/Sem",
     image: "/assets/courses/mba.jpg",
     structure: {
       years: [
@@ -420,7 +629,7 @@ export const courseDetails = {
     description: "A two-year postgraduate program providing advanced knowledge in computer applications, software development, and IT management. Perfect for students aiming for higher positions in the IT industry.",
     duration: "2 Years",
     mode: "Distance",
-    fees: "50,000/Sem",
+    fees: "17,000/Sem",
     image: "/assets/courses/mcom.webp",
     structure: {
       years: [

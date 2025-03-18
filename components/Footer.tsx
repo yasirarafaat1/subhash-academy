@@ -12,7 +12,11 @@ export default function Footer() {
   
   const distanceCourses = [
     { name: "BCA", path: "/courses/bca_distance" },
+    { name: "BA", path: "/courses/ba" },
     { name: "B.Com", path: "/courses/bcom" },
+    { name: "MA", path: "/courses/ma" },
+    { name: "MSc.(Maths)", path: "/courses/msc" },
+    { name: "MSW", path: "/courses/msw" },
     { name: "M.Com", path: "/courses/mcom" },
     { name: "MCA", path: "/courses/mca" },
     { name: "MBA", path: "/courses/mba" },

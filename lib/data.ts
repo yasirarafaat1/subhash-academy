@@ -42,34 +42,74 @@ export const courses: Course[] = [
     image: "/assets/courses/dca.webp"
   },
   {
-    id: "mba",
-    title: "Master of Business Administration",
-    slug: "mba",
-    duration: "2 Year",
-    mode: "Distance",
-    fees: "90,000/Sem",
-    description: "The Master of Business Administration (MBA) is a globally recognized postgraduate degree designed to develop the skills required for leadership and management roles in various industries. It provides a comprehensive understanding of business operations, strategic decision-making, and problem-solving.",
-    image: "/assets/courses/mba.jpg"
-  },
-  {
     id: "bcom",
     title: "Bachelor of Commerce",
     slug: "bcom",
     duration: "3 Years",
     mode: "Distance",
-    fees: "25,000/Sem",
+    fees: "6,500/Sem",
     description: "The Bachelor of Commerce (B.Com) is a three-year undergraduate degree program focused on business, finance, accounting, and commerce-related subjects. It is one of the most popular courses for students interested in pursuing careers in business, finance, banking, and corporate sectors.",
     image: "/assets/courses/bcom.webp"
   },
   {
-    id: "mcom",
-    title: "Master of Commerce",
-    slug: "mcom",
-    duration: "2 Years",
+    id: "ba",
+    title: "Bachelor of Art",
+    slug: "ba",
+    duration: "3 Years",
     mode: "Distance",
-    fees: "25,000/Sem",
-    description: "The Master of Commerce (M.Com) is a postgraduate degree program that provides advanced knowledge in commerce, finance, accounting, and business management. It is an excellent choice for students who want to build expertise in financial analysis, taxation, banking, or corporate governance.",
-    image: "/assets/courses/mcom.webp"
+    fees: "5,500/Sem",
+    description: "A Bachelor of Arts (BA) is a popular undergraduate degree focusing on liberal arts and humanities, offering a broad education with various specializations and career paths in fields like education, social work, and more.",
+    image: "/assets/courses/ba.webp"
+  },
+  {
+    id: "ma",
+    title: "Master of Art",
+    slug: "ma",
+    duration: "2 Year",
+    mode: "Distance",
+    fees: "9,000/Sem",
+    description: "The Master of Arts (MA) is a postgraduate degree awarded in the field of arts, humanities, and social sciences. It typically focuses on theoretical knowledge, research, and analytical skills in disciplines like literature, history, political science, economics, sociology, psychology, education, and languages.",
+    image: "/assets/courses/ma.webp"
+  },
+  {
+  id: "msw",
+  title: "Master of Social Work",
+  slug: "msw",
+  duration: "2 Year",
+  mode: "Distance",
+  fees: "9,000/Sem",
+  description: "The Master of Social Work (MSW) is a postgraduate degree that focuses on social work practice, welfare policies, community services, and human rights. It equips students with skills to work with individuals, families, and communities to promote social justice, advocate for the underprivileged, and bring about positive social change.",
+  image: "/assets/courses/msw.webp"
+ },
+ {
+  id: "msc",
+  title: "Master of Science(Maths)",
+  slug: "msc",
+  duration: "2 Years",
+  mode: "Distance",
+  fees: "10,000/Sem",
+  description: "The Master of Science in Mathematics (MSc Maths) is a 2-year postgraduate program divided into 2 academic years. The syllabus covers core mathematics subjects, electives, and research-based projects. It focuses on advanced mathematical theories, problem-solving, and analytical skills.",
+  image: "/assets/courses/msc.webp"
+},
+ {
+  id: "mcom",
+  title: "Master of Commerce",
+  slug: "mcom",
+  duration: "2 Years",
+  mode: "Distance",
+  fees: "9,000/Sem",
+  description: "The Master of Commerce (M.Com) is a postgraduate degree program that provides advanced knowledge in commerce, finance, accounting, and business management. It is an excellent choice for students who want to build expertise in financial analysis, taxation, banking, or corporate governance.",
+  image: "/assets/courses/mcom.webp"
+},
+  {
+    id: "mba",
+    title: "Master of Business Administration",
+    slug: "mba",
+    duration: "2 Year",
+    mode: "Distance",
+    fees: "17,000/Sem",
+    description: "The Master of Business Administration (MBA) is a globally recognized postgraduate degree designed to develop the skills required for leadership and management roles in various industries. It provides a comprehensive understanding of business operations, strategic decision-making, and problem-solving.",
+    image: "/assets/courses/mba.jpg"
   },
   {
     id: "mca",
@@ -77,7 +117,7 @@ export const courses: Course[] = [
     slug: "mca",
     duration: "2 Years",
     mode: "Distance",
-    fees: "50,000/Sem",
+    fees: "17,000/Sem",
     description: "The Master of Computer Applications (MCA) is a postgraduate degree program in computer science and information technology, designed to provide comprehensive knowledge of computer applications, software development, and IT management. It prepares students for advanced careers in the IT industry and research fields.",
     image: "/assets/courses/mca.webp"
   }
@@ -115,84 +155,84 @@ export const galleryImages: GalleryImage[] = [
   {
     id: "1",
     src: "/assets/gallery/farewell.jpg",
-    alt: "University Campus",
+    alt: "gallery",
     width: 2071,
     height: 1380
   },
   {
     id: "2",
     src: "/assets/gallery/fresher.jpg",
-    alt: "University Building",
+    alt: "gallery",
     width: 2072,
     height: 1384
   },
   {
     id: "3",
     src: "/assets/gallery/img2.jpg",
-    alt: "University Library",
+    alt: "gallery",
     width: 2070,
     height: 1380
   },
   {
     id: "4",
     src: "/assets/gallery/national_ocassion.jpg",
-    alt: "University Lecture Hall",
+    alt: "gallery",
     width: 2070,
     height: 1380
   },
   {
     id: "5",
     src: "/assets/gallery/img1.jpg",
-    alt: "University Graduation",
+    alt: "gallery",
     width: 2070,
     height: 1380
   },
   {
     id: "6",
     src: "/assets/gallery/img3.jpg",
-    alt: "University Students",
+    alt: "gallery",
     width: 2132,
     height: 1422
   },
   {
     id: "7",
     src: "/assets/gallery/img4.jpg",
-    alt: "University Entrance",
+    alt: "",
     width: 2070,
     height: 1380
   },
   {
     id: "8",
     src: "/assets/gallery/img5.jpg",
-    alt: "University Computer Lab",
+    alt: "gallery",
     width: 2074,
     height: 1384
   },
   {
     id: "9",
     src: "/assets/gallery/img6.jpg",
-    alt: "University Sports Facility",
+    alt: "gallery",
     width: 2072,
     height: 1384
   },
   {
     id: "10",
     src: "/assets/gallery/farewell2.jpg",
-    alt: "University Cafeteria",
+    alt: "gallery",
     width: 2070,
     height: 1380
   },
   {
     id: "11",
     src: "/assets/gallery/img8.jpg",
-    alt: "University Study Group",
+    alt: "gallery",
     width: 2070,
     height: 1380
   },
   {
     id: "12",
     src: "/assets/gallery/farewell3.jpg",
-    alt: "University Auditorium",
+    alt: "gallery",
     width: 2070,
     height: 1380
   }

@@ -21,16 +21,7 @@ export const courses: Course[] = [
     description: "Post Graduate Diploma in Computer Application (PGDCA) program is designed to provide students with a comprehensive understanding of business principles and practices. The curriculum covers areas such as management, marketing, finance, human resources, and entrepreneurship. Through case studies, projects, and internships, students develop the skills needed to succeed in the corporate world and become effective business leaders.",
     image: "/assets/courses/pgdca.webp"
   },
-  {
-    id: "adca",
-    title: "Advance Diploma in Computer Application",
-    slug: "adca",
-    duration: "1 Years",
-    mode: "Regular",
-    fees: "3,500/Sem",
-    description: "Advance Diploma in Computer Application (ADCA) program offers a rigorous education in scientific principles and methodologies. Students can specialize in various fields such as Physics, Chemistry, Biology, Mathematics, or Computer Science. The curriculum combines theoretical knowledge with practical laboratory work, research projects, and field studies. Graduates are prepared for careers in research, education, industry, or further academic pursuits.",
-    image: "/assets/courses/adca.webp"
-  },
+  
   {
     id: "dca",
     title: "Diploma in Computer Application",
@@ -41,86 +32,7 @@ export const courses: Course[] = [
     description: "The Diploma in Computer Applications (DCA) is a short-term diploma course designed to provide foundational knowledge of computer applications. It is ideal for students, professionals, and individuals looking to enhance their computer skills for career opportunities in IT and related fields.",
     image: "/assets/courses/dca.webp"
   },
-  {
-    id: "bcom",
-    title: "Bachelor of Commerce",
-    slug: "bcom",
-    duration: "3 Years",
-    mode: "Distance",
-    fees: "6,500/Sem",
-    description: "The Bachelor of Commerce (B.Com) is a three-year undergraduate degree program focused on business, finance, accounting, and commerce-related subjects. It is one of the most popular courses for students interested in pursuing careers in business, finance, banking, and corporate sectors.",
-    image: "/assets/courses/bcom.webp"
-  },
-  {
-    id: "ba",
-    title: "Bachelor of Art",
-    slug: "ba",
-    duration: "3 Years",
-    mode: "Distance",
-    fees: "5,500/Sem",
-    description: "A Bachelor of Arts (BA) is a popular undergraduate degree focusing on liberal arts and humanities, offering a broad education with various specializations and career paths in fields like education, social work, and more.",
-    image: "/assets/courses/ba.webp"
-  },
-  {
-    id: "ma",
-    title: "Master of Art",
-    slug: "ma",
-    duration: "2 Year",
-    mode: "Distance",
-    fees: "9,000/Sem",
-    description: "The Master of Arts (MA) is a postgraduate degree awarded in the field of arts, humanities, and social sciences. It typically focuses on theoretical knowledge, research, and analytical skills in disciplines like literature, history, political science, economics, sociology, psychology, education, and languages.",
-    image: "/assets/courses/ma.webp"
-  },
-  {
-  id: "msw",
-  title: "Master of Social Work",
-  slug: "msw",
-  duration: "2 Year",
-  mode: "Distance",
-  fees: "9,000/Sem",
-  description: "The Master of Social Work (MSW) is a postgraduate degree that focuses on social work practice, welfare policies, community services, and human rights. It equips students with skills to work with individuals, families, and communities to promote social justice, advocate for the underprivileged, and bring about positive social change.",
-  image: "/assets/courses/msw.webp"
- },
- {
-  id: "msc",
-  title: "Master of Science(Maths)",
-  slug: "msc",
-  duration: "2 Years",
-  mode: "Distance",
-  fees: "10,000/Sem",
-  description: "The Master of Science in Mathematics (MSc Maths) is a 2-year postgraduate program divided into 2 academic years. The syllabus covers core mathematics subjects, electives, and research-based projects. It focuses on advanced mathematical theories, problem-solving, and analytical skills.",
-  image: "/assets/courses/msc.webp"
-},
- {
-  id: "mcom",
-  title: "Master of Commerce",
-  slug: "mcom",
-  duration: "2 Years",
-  mode: "Distance",
-  fees: "9,000/Sem",
-  description: "The Master of Commerce (M.Com) is a postgraduate degree program that provides advanced knowledge in commerce, finance, accounting, and business management. It is an excellent choice for students who want to build expertise in financial analysis, taxation, banking, or corporate governance.",
-  image: "/assets/courses/mcom.webp"
-},
-  {
-    id: "mba",
-    title: "Master of Business Administration",
-    slug: "mba",
-    duration: "2 Year",
-    mode: "Distance",
-    fees: "17,000/Sem",
-    description: "The Master of Business Administration (MBA) is a globally recognized postgraduate degree designed to develop the skills required for leadership and management roles in various industries. It provides a comprehensive understanding of business operations, strategic decision-making, and problem-solving.",
-    image: "/assets/courses/mba.jpg"
-  },
-  {
-    id: "mca",
-    title: "Master in Computer Application",
-    slug: "mca",
-    duration: "2 Years",
-    mode: "Distance",
-    fees: "17,000/Sem",
-    description: "The Master of Computer Applications (MCA) is a postgraduate degree program in computer science and information technology, designed to provide comprehensive knowledge of computer applications, software development, and IT management. It prepares students for advanced careers in the IT industry and research fields.",
-    image: "/assets/courses/mca.webp"
-  }
+ 
 ];
 
 export const facilities: Facility[] = [
@@ -154,14 +66,14 @@ export const facilities: Facility[] = [
 export const galleryImages: GalleryImage[] = [
   {
     id: "1",
-    src: "/assets/gallery/farewell.jpg",
+    src: "/assets/gallery/fresher.jpg",
     alt: "gallery",
     width: 2071,
     height: 1380
   },
   {
     id: "2",
-    src: "/assets/gallery/fresher.jpg",
+    src: "/assets/gallery/farewell.jpg",
     alt: "gallery",
     width: 2072,
     height: 1384

@@ -6,21 +6,20 @@ export default function Footer() {
   const regularCourses = [
     { name: "BCA", path: "/courses/bca" },
     { name: "PGDCA", path: "/courses/pgdca" },
-    { name: "ADCA", path: "/courses/adca" },
     { name: "DCA", path: "/courses/dca" },
   ];
   
-  const distanceCourses = [
-    { name: "BCA", path: "/courses/bca_distance" },
-    { name: "BA", path: "/courses/ba" },
-    { name: "B.Com", path: "/courses/bcom" },
-    { name: "MA", path: "/courses/ma" },
-    { name: "MSc.(Maths)", path: "/courses/msc" },
-    { name: "MSW", path: "/courses/msw" },
-    { name: "M.Com", path: "/courses/mcom" },
-    { name: "MCA", path: "/courses/mca" },
-    { name: "MBA", path: "/courses/mba" },
-  ];
+  // const distanceCourses = [
+  //   { name: "BCA", path: "/courses/bca_distance" },
+  //   { name: "BA", path: "/courses/ba" },
+  //   { name: "B.Com", path: "/courses/bcom" },
+  //   { name: "MA", path: "/courses/ma" },
+  //   { name: "MSc.(Maths)", path: "/courses/msc" },
+  //   { name: "MSW", path: "/courses/msw" },
+  //   { name: "M.Com", path: "/courses/mcom" },
+  //   { name: "MCA", path: "/courses/mca" },
+  //   { name: "MBA", path: "/courses/mba" },
+  // ];
 
   return (
     <footer className="bg-gradient-to-b from-card to-card/95 text-card-foreground">
@@ -84,7 +83,7 @@ export default function Footer() {
           <div className="lg:col-span-3">
             <h3 className="text-lg font-semibold mb-4 flex items-center">
               <GraduationCap className="h-5 w-5 mr-2 text-primary" />
-              Regular Courses
+              Courses
             </h3>
             <ul className="space-y-2">
               {regularCourses.map((course) => (
@@ -102,7 +101,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Distance Courses - 3 columns */}
+          {/* Distance Courses - 3 columns
           <div className="lg:col-span-3">
             <h3 className="text-lg font-semibold mb-4 flex items-center">
               <GraduationCap className="h-5 w-5 mr-2 text-primary" />
@@ -122,7 +121,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* Contact Section */}

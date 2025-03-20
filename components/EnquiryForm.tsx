@@ -25,7 +25,10 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
   email: z.string().email({ message: "Please enter a valid email address" }),
   phone: z.string().min(10, { message: "Please enter a valid phone number" }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters" }),
+  course: z.string().min(1, { message: "Please select a course" }),
+  message: z
+    .string()
+    .min(10, { message: "Message must be at least 10 characters" }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -39,6 +42,7 @@ export default function EnquiryForm() {
       name: "",
       email: "",
       phone: "",
+      course: "",
       message: "",
     },
   });
@@ -52,14 +56,15 @@ export default function EnquiryForm() {
       });
 
       await emailjs.send(
-        "service_y8yqekm", 
-        "template_d6tyoc6", 
+        "service_y8yqekm",
+        "template_d6tyoc6",
         {
           name: data.name,
           email: data.email,
           phone: data.phone,
+          course: data.course,
           message: data.message,
-        }, 
+        },
         "YIDbPt-jS0NTrTnlc"
       );
 
@@ -113,6 +118,25 @@ export default function EnquiryForm() {
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
                 <Input placeholder="+91 0000 0000 00" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="course"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Course</FormLabel>
+              <FormControl>
+                <select {...field} className="w-full rounded-md border border-input bg-background px-3 py-2">
+                  <option value="">Select a Course</option>
+                  <option value="dca">DCA (Diploma in Computer Applications)</option>
+                  <option value="pgdca">PGDCA (Post Graduate Diploma in Computer Applications)</option>
+                  <option value="bca">BCA (Bachelor of Computer Applications)</option>
+                </select>
               </FormControl>
               <FormMessage />
             </FormItem>

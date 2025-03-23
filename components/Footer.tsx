@@ -9,18 +9,6 @@ export default function Footer() {
     { name: "DCA", path: "/courses/dca" },
   ];
   
-  // const distanceCourses = [
-  //   { name: "BCA", path: "/courses/bca_distance" },
-  //   { name: "BA", path: "/courses/ba" },
-  //   { name: "B.Com", path: "/courses/bcom" },
-  //   { name: "MA", path: "/courses/ma" },
-  //   { name: "MSc.(Maths)", path: "/courses/msc" },
-  //   { name: "MSW", path: "/courses/msw" },
-  //   { name: "M.Com", path: "/courses/mcom" },
-  //   { name: "MCA", path: "/courses/mca" },
-  //   { name: "MBA", path: "/courses/mba" },
-  // ];
-
   return (
     <footer className="bg-gradient-to-b from-card to-card/95 text-card-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -101,27 +89,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Distance Courses - 3 columns
-          <div className="lg:col-span-3">
-            <h3 className="text-lg font-semibold mb-4 flex items-center">
-              <GraduationCap className="h-5 w-5 mr-2 text-primary" />
-              Distance Learning
-            </h3>
-            <ul className="space-y-2">
-              {distanceCourses.map((course) => (
-                <li key={course.name}>
-                  <Link
-                    href={course.path}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center group"
-                  >
-                    <span className="hover:translate-x-1 transition-transform duration-200 inline-block">
-                      {course.name}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
         </div>
 
         {/* Contact Section */}

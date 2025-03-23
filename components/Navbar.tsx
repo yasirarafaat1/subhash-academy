@@ -23,17 +23,7 @@ import {
 const courses = [
   { name: "BCA", slug: "bca" },
   { name: "PGDCA", slug: "pgdca" },
-  { name: "DCA", slug: "dca" },
-  // { name: "ADCA", slug: "adca" },
-  // { name: "BCA (Dist.)", slug: "bca_distance" },
-  // { name: "BA", slug: "ba" },
-  // { name: "B.Com", slug: "bcom" },
-  // { name: "MA", slug: "ma" },
-  // { name: "MSW", slug: "msw" },
-  // { name: "MSc. (Maths)", slug: "msc" },
-  // { name: "M.Com", slug: "mcom" },
-  // { name: "MCA", slug: "mca" },
-  // { name: "MBA", slug: "mba" },
+  { name: "DCA", slug: "dca" }
 ];
 
 const navItems = [

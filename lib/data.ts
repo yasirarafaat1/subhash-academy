@@ -64,13 +64,13 @@ export const facilities: Facility[] = [
 ];
 
 export const galleryImages: GalleryImage[] = [
-  // {
-  //   id: "1",
-  //   src: "/assets/gallery/fresher.jpg",
-  //   alt: "gallery",
-  //   width: 2071,
-  //   height: 1380
-  // },
+  {
+    id: "1",
+    src: "/assets/infrastructure/multimedia.JPG",
+    alt: "gallery",
+    width: 2071,
+    height: 1380
+  },
   {
     id: "2",
     src: "/assets/gallery/farewell.jpg",

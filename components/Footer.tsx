@@ -55,7 +55,7 @@ export default function Footer() {
               {["Home", "About", "Gallery", "Infrastructure", "Contact"].map((item) => (
                 <li key={item}>
                   <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`}
                     className="text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center"
                   >
                     <span className="hover:translate-x-1 transition-transform duration-200 inline-block">

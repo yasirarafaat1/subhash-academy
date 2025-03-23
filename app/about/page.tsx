@@ -196,7 +196,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
               <Image
-                src="/assets/gallery/img2.jpg"
+                src="/assets/gallery/img4.jpg"
                 alt="Campus Life"
                 fill
                 className="object-cover"
@@ -212,7 +212,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
               <Image
-                src="/assets/gallery/fresher.jpg"
+                src="/assets/gallery/img5.jpg"
                 alt="Campus Life"
                 fill
                 className="object-cover"

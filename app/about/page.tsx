@@ -104,12 +104,14 @@ export default function AboutPage() {
             },
             {
               name: "Naseem Zama Khan",
-              position: "Executive Manager",
-              image: "/assets/teachers/Naseem Zama Khan Sir.jpg"
+              position: "System Manager",
+              image: "/assets/teachers/Naseem Zama Khan Sir.jpg",
+              qualification: "M. Tech. (IT)",
+              experience: "23 years"
             },
             {
               name: "Mayank Jeet Saxena",
-              position: "Accountant",
+              position: "Office Admin",
               image: "/assets/teachers/mayank_saxena_sir.jpg",
               qualification: "M.Sc. (CS)",
               experience: "24 years"
@@ -123,7 +125,7 @@ export default function AboutPage() {
             },
             {
               name: "Om Sir",
-              position: "HOD",
+              position: "Linux",
               image: "/assets/teachers/om sir.jpg",
               qualification: "M.Tech (IT)",
               experience: "7 years"
@@ -131,20 +133,20 @@ export default function AboutPage() {
             {
               name: "Anchal Dixit",
               image: "/assets/teachers/aanchal dixit maam.jpg",
-              position: "HOD",
+              position: "Communication",
               qualification: "MCA",
               experience: "5 years"
             },
             {
               name: "Kajal Dubey",
               image: "/assets/teachers/Kajal maam.jpg",
-              position: "HOD",
+              position: "Lab Incharge",
               qualification: "MCA",
               experience: "5 years"
             },
             {
               name: "Puneet Rajput",
-              position: "HOD",
+              position: "Java",
               image: "/assets/teachers/punit_rajput_sir.jpeg",
               qualification: "MCA",
               experience: "3 years"

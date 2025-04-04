@@ -97,22 +97,58 @@ export default function AboutPage() {
             {
               name: "Devesh Kumar Saxena",
               position: "Director",
-              image: "/assets/teachers/director.webp"
+              image: "/assets/teachers/director.webp",
+              qualification: "MBA",
+              experience: "15 years"
             },
             {
               name: "Naseem Zama Khan",
               position: "Executive Manager",
-              image: "/assets/teachers/Naseem Zama Khan Sir.jpg"
+              image: "/assets/teachers/Naseem Zama Khan Sir.jpg",
+              qualification: "M.Tech (IT)",
+              experience: "23 years "
             },
             {
-              name: "Mayank Saxena",
-              position: "Acountant",
-              image: "/assets/teachers/mayank_saxena_sir.jpg"
+              name: "Mayank Jeet Saxena",
+              position: "Accountant",
+              image: "/assets/teachers/mayank_saxena_sir.jpg",
+              qualification: "M.Sc. (CS)",
+              experience: "24 years"
             },
             {
               name: "Mahboob Siddiqui",
               position: "HOD",
-              image: "/assets/teachers/Mahboob_Siddiqui_Sir.jpg"
+              image: "/assets/teachers/Mahboob_Siddiqui_Sir.jpg",
+              qualification: "MCA",
+              experience: "18 years"
+            },
+            {
+              name: "Om Sir",
+              position: "HOD",
+              image: "/assets/teachers/om sir.jpg",
+              qualification: "M.Tech (IT)",
+              experience: "7 years"
+            },
+            {
+              name: "Anchal Dixit",
+              image: "/assets/teachers/aanchal dixit maam.jpg",
+              position: "HOD",
+              qualification: "MCA",
+              experience: "5 years"
+            },
+            {
+              name: "Kajal Dubey",
+              image: "/assets/teachers/Kajal maam.jpg",
+              position: "HOD",
+              qualification: "MCA",
+              experience: "5 years"
+            },
+            {
+              name: "Puneet Rajput",
+              position: "HOD",
+              image: "/assets/teachers/punit_rajput_sir.jpeg",
+              qualification: "MCA",
+              experience: "3 years"
             }
           ].map((leader, index) => (
             <div key={index} className="bg-card rounded-lg overflow-hidden shadow-sm">
@@ -127,49 +163,13 @@ export default function AboutPage() {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-1">{leader.name}</h3>
                 <p className="text-muted-foreground">{leader.position}</p>
+                <p className="text-muted-foreground">{leader.qualification}</p>
+                <p className="text-muted-foreground"> {leader.experience}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Achievements */}
-      {/* <div className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Achievements</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: "Accreditation",
-              description: "Accredited by the National Board of Accreditation (NBA) for excellence in education."
-            },
-            {
-              title: "Research Publications",
-              description: "Over 500 research papers published in international journals by our faculty and students."
-            },
-            {
-              title: "Industry Partnerships",
-              description: "Collaborations with over 50 leading companies for internships and placements."
-            },
-            {
-              title: "Global Recognition",
-              description: "Ranked among the top 100 educational institutions in the country."
-            },
-            {
-              title: "Alumni Success",
-              description: "Our alumni are working in leading organizations across the globe."
-            },
-            {
-              title: "Innovation Hub",
-              description: "Established an innovation hub that has incubated over 20 successful startups."
-            }
-          ].map((achievement, index) => (
-            <div key={index} className="bg-card p-6 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">{achievement.title}</h3>
-              <p className="text-muted-foreground">{achievement.description}</p>
-            </div>
-          ))}
-        </div>
-      </div> */}
 
       {/* Campus Life */}
       <div>

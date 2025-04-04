@@ -42,6 +42,7 @@ const navItems = [
   { name: "Gallery", href: "/gallery", icon: <ImageIcon className="h-4 w-4 mr-1" /> },
   { name: "Admission Enquiry", href: "/admission-enquiry", icon: <FileText className="h-4 w-4 mr-1" /> },
   { name: "Contact Us", href: "/contact", icon: <Phone className="h-4 w-4 mr-1" /> },
+  { name: "Results", href: "https://mcu.ac.in", icon: <FileText className="h-4 w-4 mr-1" />, target: "_blank", rel: "noopener noreferrer" },
 ];
 
 function Navbar() {
@@ -99,6 +100,8 @@ function Navbar() {
                   key={item.name}
                   href={item.href}
                   className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 flex items-center"
+                  target={item.target}
+                  rel={item.rel}
                 >
                   {item.icon}
                   {item.name}
@@ -175,6 +178,8 @@ function Navbar() {
                 href={item.href}
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 flex items-center"
                 onClick={() => setIsOpen(false)}
+                target={item.target}
+                rel={item.rel}
               >
                 {item.icon}
                 {item.name}

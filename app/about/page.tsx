@@ -12,7 +12,7 @@ export default function AboutPage() {
         <h1 className="text-4xl font-bold mb-4">About Subhash Academy </h1>
         <p className="text-muted-foreground max-w-3xl mx-auto">
           It is an All India Council of Technical Education (AICTE) approved
-          Institute.
+          institute.
         </p>
       </div>
 
@@ -24,6 +24,7 @@ export default function AboutPage() {
             alt="University Campus"
             fill
             className="object-cover"
+            sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
           />
         </div>
         <div>
@@ -58,7 +59,7 @@ export default function AboutPage() {
             academic excellence and industry-aligned curriculum.
           </p>
           <p className="text-muted-foreground">
-            Today, <span className="font-[700]">SA is a one of the college in district Kannauj which is AICTE(1-44512605107) approved.</span>We continue to evolve and adapt to the changing educational landscape while staying true to our core values and mission.
+            Today, <span className="font-[700]">SA is one of the colleges in district Kannauj which is AICTE(1-44512605107) approved.</span> We continue to evolve and adapt to the changing educational landscape while staying true to our core values and mission.
           </p>
         </div>
       </div>
@@ -91,7 +92,7 @@ export default function AboutPage() {
 
       {/* Leadership Team */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">Our Leadership Team</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Our Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
@@ -104,9 +105,7 @@ export default function AboutPage() {
             {
               name: "Naseem Zama Khan",
               position: "Executive Manager",
-              image: "/assets/teachers/Naseem Zama Khan Sir.jpg",
-              qualification: "M.Tech (IT)",
-              experience: "23 years "
+              image: "/assets/teachers/Naseem Zama Khan Sir.jpg"
             },
             {
               name: "Mayank Jeet Saxena",
@@ -158,6 +157,7 @@ export default function AboutPage() {
                   alt={leader.name}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
                 />
               </div>
               <div className="p-6">
@@ -192,6 +192,7 @@ export default function AboutPage() {
                 alt="Campus Life"
                 fill
                 className="object-cover"
+                sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
               />
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
@@ -200,6 +201,7 @@ export default function AboutPage() {
                 alt="Campus Life"
                 fill
                 className="object-cover"
+                sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
                 />
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
@@ -208,6 +210,7 @@ export default function AboutPage() {
                 alt="Campus Life"
                 fill
                 className="object-cover"
+                sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
                 />
             </div>
             <div className="relative h-48 rounded-lg overflow-hidden">
@@ -216,6 +219,7 @@ export default function AboutPage() {
                 alt="Campus Life"
                 fill
                 className="object-cover"
+                sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
               />
             </div>
           </div>

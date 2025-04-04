@@ -139,7 +139,7 @@ export default function AboutPage() {
             },
             {
               name: "Kajal Dubey",
-              image: "/assets/teachers/Kajal maam.jpg",
+              image: "/assets/teachers/Kajal Maam.jpg",
               position: "Lab Incharge",
               qualification: "MCA",
               experience: "5 years"

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center">
+      <section className="relative h-[600px] flex items-start pt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/front1.jpeg"

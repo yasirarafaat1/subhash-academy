@@ -91,6 +91,7 @@ function Navbar() {
               />
             </a>
  <h1>Subhash Academy</h1>
+<h2>College of IT & Management</h2>
           </div>
 
           {/* Desktop Navigation */}

@@ -90,6 +90,7 @@ function Navbar() {
                 src={"/logo.png"}
               />
             </a>
+ <h2>SS Public School</h2>
           </div>
 
           {/* Desktop Navigation */}

@@ -8,6 +8,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from '@/lib/firebase';
 import toast, { Toaster } from 'react-hot-toast';
 import emailjs from '@emailjs/browser';
+import Image from "next/image";
 
 interface PageProps {
   params: { [key: string]: string | string[] | undefined }
@@ -75,113 +76,115 @@ export default function ContactPage({ params, searchParams }: PageProps) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <Toaster />
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-        <p className="text-muted-foreground max-w-3xl mx-auto">
-          We're here to help. Get in touch with us for any queries or information.
-        </p>
-      </div>
+    <div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <Toaster />
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+          <p className="text-muted-foreground max-w-3xl mx-auto">
+            We're here to help. Get in touch with us for any queries or information.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div>
-          <div className="bg-card rounded-lg p-8 shadow-sm mb-8 border">
-            <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="bg-primary/10 p-3 rounded-full mr-4">
-                  <MapPin className="h-6 w-6 text-primary" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <div className="bg-card rounded-lg p-8 shadow-sm mb-8 border">
+              <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="bg-primary/10 p-3 rounded-full mr-4">
+                    <MapPin className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Address</h3>
+                    <p className="text-muted-foreground">
+                      Awas Vikas Colony,<br />
+                      Chhibramau, Kannauj, <br /> Uttar Pradesh, 209721<br />
+                      India
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Address</h3>
-                  <p className="text-muted-foreground">
-                    Awas Vikas Colony,<br />
-                    Chhibramau, Kannauj, <br /> Uttar Pradesh, 209721<br />
-                    India
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-primary/10 p-3 rounded-full mr-4">
-                  <Phone className="h-6 w-6 text-primary" />
+                <div className="flex items-start">
+                  <div className="bg-primary/10 p-3 rounded-full mr-4">
+                    <Phone className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <p className="text-muted-foreground">
+                      System Manager: +91 9335 9390 00<br />
+                      Administrative Office: +91 7275 0240 00<br />
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-muted-foreground">
-                    Main: +91 9335 9390 00<br />
-                    Office: +91 7275 0240 00<br />
-                  </p>
-                </div>
-              </div>
 
-              <div className="flex items-start">
-                <div className="bg-primary/10 p-3 rounded-full mr-4">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-muted-foreground">
-                    Email: subhashacademy@gmail.com
-                  </p>
+                <div className="flex items-start">
+                  <div className="bg-primary/10 p-3 rounded-full mr-4">
+                    <Mail className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Email</h3>
+                    <p className="text-muted-foreground">
+                      Email: subhashacademy@gmail.com
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-card rounded-lg p-8 shadow-sm border h-fit">
-          <h2 className="text-2xl font-bold mb-6">Contact Form</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg"
-              required
-            />
+          {/* <div className="bg-card rounded-lg p-8 shadow-sm border h-fit">
+            <h2 className="text-2xl font-bold mb-6">Contact Form</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+                required
+              />
 
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg"
-              required
-            />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+                required
+              />
 
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-lg"
-              required
-            />
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg"
+                required
+              />
 
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Message"
-              className="w-full p-3 border rounded-lg"
-              required
-              rows={4}
-            />
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Message"
+                className="w-full p-3 border rounded-lg"
+                required
+                rows={4}
+              />
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full"
-            >
-              {isSubmitting ? "Sending..." : "Send Message"}
-            </Button>
-          </form>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </Button>
+            </form>
+          </div> */}
         </div>
       </div>
     </div>

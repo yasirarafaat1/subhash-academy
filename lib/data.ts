@@ -72,19 +72,33 @@ export const galleryImages: GalleryImage[] = [
     height: 1380
   },
   {
+    id: "9",
+    src: "/assets/infrastructure/lab.png",
+    alt: "gallery",
+    width: 2071,
+    height: 1380
+  },
+  {
     id: "2",
     src: "/assets/gallery/farewell.jpg",
     alt: "gallery",
     width: 2072,
     height: 1384
   },
-  // {
-  //   id: "3",
-  //   src: "/assets/gallery/img2.jpg",
-  //   alt: "gallery",
-  //   width: 2070,
-  //   height: 1380
-  // },
+  {
+    id: "10",
+    src : "/assets/infrastructure/class.jpeg",
+    alt: "gallery",
+    width: 2072,
+    height: 1384
+  },
+  {
+    id: "3",
+    src: "/assets/infrastructure/library.jpeg",
+    alt: "gallery",
+    width: 2070,
+    height: 1380
+  },
   {
     id: "4",
     src: "/assets/gallery/national_ocassion.jpg",
@@ -92,20 +106,6 @@ export const galleryImages: GalleryImage[] = [
     width: 2070,
     height: 1380
   },
-  // {
-  //   id: "5",
-  //   src: "/assets/gallery/img1.jpg",
-  //   alt: "gallery",
-  //   width: 2070,
-  //   height: 1380
-  // },
-  // {
-  //   id: "6",
-  //   src: "/assets/gallery/img3.jpg",
-  //   alt: "gallery",
-  //   width: 2132,
-  //   height: 1422
-  // },
   {
     id: "7",
     src: "/assets/gallery/img4.jpg",
@@ -137,13 +137,6 @@ export const galleryImages: GalleryImage[] = [
   {
     id: "11",
     src: "/assets/gallery/img8.jpg",
-    alt: "gallery",
-    width: 2070,
-    height: 1380
-  },
-  {
-    id: "12",
-    src: "/assets/gallery/farewell3.jpg",
     alt: "gallery",
     width: 2070,
     height: 1380

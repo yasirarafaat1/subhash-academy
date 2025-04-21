@@ -79,7 +79,7 @@ function Navbar() {
     <div className='mb-10'>
 
     <nav className="bg-white dark:bg-gray-900 shadow-lg fixed w-full top-0 z-50 border-b border-gray-200 dark:border-gray-700">
-      <div className="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-1 px-4 sm:px-2 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <a href="/" className="flex items-center">
@@ -90,9 +90,9 @@ function Navbar() {
                 src={"/logo.png"}
               />
             </a>
-            <div className='flex flex-col ml-3'>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Subhash Academy</h1>
-              <h2 className="text-sm text-gray-600 dark:text-gray-300">College of IT & Management</h2>
+            <div className='flex flex-col ml-3 min-w-[120px]'>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white whitespace-nowrap">Subhash Academy</h1>
+              <h2 className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">College of IT & Management</h2>
             </div>
           </div>
 
@@ -156,8 +156,7 @@ function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none transition-colors duration-200"
@@ -175,6 +174,9 @@ function Navbar() {
       {/* Mobile menu */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="px-3 py-2">
+            <ThemeToggle />
+          </div>
           {navItems.map((item) => 
             !item.dropdown ? (
               <a

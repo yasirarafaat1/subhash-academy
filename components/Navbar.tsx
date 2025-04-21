@@ -90,7 +90,7 @@ function Navbar() {
                 src={"/logo.png"}
               />
             </a>
- <h2>SS Public School</h2>
+ <h1>Subhash Academy</h1>
           </div>
 
           {/* Desktop Navigation */}

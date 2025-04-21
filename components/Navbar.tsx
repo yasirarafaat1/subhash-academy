@@ -90,6 +90,10 @@ function Navbar() {
                 src={"/logo.png"}
               />
             </a>
+            <div className='flex flex-col ml-3'>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Subhash Academy</h1>
+              <h2 className="text-sm text-gray-600 dark:text-gray-300">College of IT & Management</h2>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

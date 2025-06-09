@@ -5,6 +5,7 @@ import EnquiryForm from "@/components/EnquiryForm";
 import CourseCard from "@/components/CourseCard";
 import { ArrowRight } from "lucide-react";
 import { courses, galleryImages } from "@/lib/data";
+import NoticeBoard from "@/components/NoticeBoard";
 
 export default function Home() {
   return (
@@ -77,13 +78,11 @@ export default function Home() {
                 <Link href="/about">Learn More About Us</Link>
               </Button>
             </div>
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-              <Image
-                src="/assets/front2.jpeg"
-                alt="University Building"
-                fill
-                className="object-cover"
-              />
+            <div className="relative w-full">
+              <h3 className="text-2xl font-bold mb-4 text-center lg:text-left">Latest Notices</h3>
+              <div className="rounded-lg overflow-hidden shadow-xl bg-white">
+                <NoticeBoard />
+              </div>
             </div>
           </div>
         </div>

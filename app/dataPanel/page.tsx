@@ -235,7 +235,7 @@ export default function DataPanel() {
 
   // Main admin panel
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 mt-6">
       {/* Header */}
       <div className="bg-blue-600 text-white p-4 shadow-md">
         <div className="container mx-auto flex justify-between items-center">

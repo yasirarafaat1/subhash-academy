@@ -24,7 +24,7 @@ export default function RootLayout({
       <link rel="icon" href="/logo.png" sizes="any" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

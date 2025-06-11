@@ -11,7 +11,7 @@ import {
   ChevronDown,
   Home,
   Info,
-  Image as ImageIcon, // Rename to avoid conflict
+  Image as ImageIcon,
   BookOpen,
   Building,
   FileText,
@@ -41,8 +41,8 @@ const navItems = [
   },
   { name: "Gallery", href: "/gallery", icon: <ImageIcon className="h-4 w-4 mr-1" /> },
   { name: "Admission Enquiry", href: "/admission-enquiry", icon: <FileText className="h-4 w-4 mr-1" /> },
-  { name: "Contact Us", href: "/contact", icon: <Phone className="h-4 w-4 mr-1" /> },
   { name: "Results", href: "https://mcu.ac.in", icon: <FileText className="h-4 w-4 mr-1" />, target: "_blank", rel: "noopener noreferrer" },
+  { name: "Admin", href: "/dataPanel", icon: <User className="h-4 w-4 mr-1" /> },
 ];
 
 function Navbar() {

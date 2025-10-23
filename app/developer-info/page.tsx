@@ -10,7 +10,7 @@ export default function DeveloperInfo() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-background text-center p-6">
       {/* Company Logo */}
       <Image
-        src={"/akamifyLogo.png"}
+        src={"/developer.jpeg"}
         alt="Company Logo"
         width={150}
         height={150}
@@ -25,16 +25,17 @@ export default function DeveloperInfo() {
         <Button
           variant="outline"
           className="w-full"
-          onClick={() => window.location.href = 'mailto:support@akamify.com'}
+          onClick={() => window.location.href = 'mailto:mailforyasir@gmail.com'}
         >
-          <Mail className="h-5 w-5 mr-2" /> support@akamify.com
+          <Mail className="h-5 w-5 mr-2" /> mailforyasir@gmail.com
         </Button>
 
         {/* WhatsApp Business */}
         <Button
           variant="outline"
           className="w-full"
-          onClick={() => window.location.href = 'https://wa.me/917317322775'}
+          onClick={() => window.location.href = 'https://wa.me/917905325078'}
+          
         >
           WhatsApp Business
         </Button>
@@ -43,7 +44,7 @@ export default function DeveloperInfo() {
         <Button
           variant="outline"
           className="w-full"
-          onClick={() => window.location.href = 'https://www.instagram.com/akamify_tech/'}
+          onClick={() => window.location.href = 'https://www.instagram.com/yasir.arafaat1/'}
         >
           Instagram
         </Button>

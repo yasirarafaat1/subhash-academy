@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
     <div className="min-h-screen p-10 bg-gray-100 text-gray-900">
       <div className=" mx-auto bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-gray-700">Effective Date: [Insert Date]</p>
+        <p className="text-gray-700">Effective Date: 1 July 2025</p>
 
         <p className="mt-4">
           Welcome to Subhash Academy. Your privacy is important to us, and we are
@@ -64,8 +64,8 @@ export default function PrivacyPolicy() {
         </p>
         <p className="mt-2"><strong>Subhash Academy</strong></p>
         <p>Email: <a href="subhashacademy@gmail.com" className="text-blue-600">subhashacademy@gmail.com</a></p>
-        <p>Phone: [Insert Contact Number]</p>
-        <p>Website: [Insert Website URL]</p>
+        <p>Phone: +91 9335 9390 00 </p>
+        <p>Website: <a href="subhashacademy.co.in">subhashacademy.co.in</a></p>
 
         <p className="text-gray-700 mt-4">
           By using our website and enrolling in our courses, you agree to the terms of this Privacy Policy.

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-start pt-20">
+      <section className="relative h-[300px] sm:h-[500px] md:h-[600px] flex items-start pt-12 sm:pt-16 md:pt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/front1.jpeg"

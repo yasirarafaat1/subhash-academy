@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, query, orderBy, deleteDoc, doc, addDoc, updateDoc, Timestamp } from "firebase/firestore";
 import { db } from '@/lib/firebase';
-import { Loader2, Plus, Trash2, Eye, EyeOff, View, Edit2, X, Save } from "lucide-react";
+import { Loader2, Plus, Trash2, Eye, EyeOff, Edit2, X, Save, LogOutIcon, LucideUserCog2 } from "lucide-react";
 import toast from "react-hot-toast";
 import {
   Pagination,
@@ -393,19 +393,23 @@ export default function DataPanel() {
 
   // Main admin panel
   return (
-    <div className="min-h-screen bg-gray-100 mt-6">
+    <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <div className="bg-blue-600 text-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-xl font-bold">Admin Panel</h1>
+      <div className="sticky top-0 bg-blue-600 text-white p-4 shadow-md">
+        <div className="flex justify-between items-center">
+          <h1 className="flex items-center text-xl font-bold">
+            <LucideUserCog2  className="w-6 h-6 mr-1"/>
+            Admin Panel
+            </h1>
           <button
             onClick={() => {
               localStorage.removeItem("adminPassword");
               setIsPasswordCorrect(false);
               setPassword("");
             }}
-            className="px-4 py-2 bg-red-600 rounded hover:bg-red-700 text-sm"
+            className="flex items-center px-4 py-2 bg-red-600 rounded hover:bg-red-700 text-sm"
           >
+            <LogOutIcon className="w-4 h-4 mr-1"/>
             Sign Out
           </button>
         </div>

@@ -2,10 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/toaster';
-import NoticePushAuto from '@/components/NoticePushAuto';
+import AppShell from '@/components/AppShell';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,14 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">
-              <NoticePushAuto />
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <AppShell>{children}</AppShell>
         </ThemeProvider>
           <Toaster />
       </body>

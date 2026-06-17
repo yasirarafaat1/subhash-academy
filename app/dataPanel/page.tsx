@@ -378,6 +378,13 @@ export default function DataPanel() {
             >
               Sign In
             </button>
+            <button
+              type="button"
+              onClick={() => window.location.href = '/'}
+              className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-50 transition-colors"
+            >
+              Back to Home
+            </button>
           </div>
         </div>
       </div>
@@ -405,6 +412,57 @@ export default function DataPanel() {
       </div>
 
       <div className="container mx-auto p-4">
+        <Dialog open={submissionModalOpen} onOpenChange={(open) => {
+          if (!open) closeSubmissionModal();
+          else setSubmissionModalOpen(true);
+        }}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Submission Details</DialogTitle>
+              <DialogDescription>
+                Review the full form submission details below.
+              </DialogDescription>
+            </DialogHeader>
+            {selectedSubmission ? (
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-lg bg-gray-50 p-4">
+                    <p className="text-sm text-gray-500">Name</p>
+                    <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.name}</p>
+                  </div>
+                  <div className="rounded-lg bg-gray-50 p-4">
+                    <p className="text-sm text-gray-500">Email</p>
+                    <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.email}</p>
+                  </div>
+                  <div className="rounded-lg bg-gray-50 p-4">
+                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.phone || 'N/A'}</p>
+                  </div>
+                  <div className="rounded-lg bg-gray-50 p-4">
+                    <p className="text-sm text-gray-500">Submitted</p>
+                    <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.timestamp?.toDate().toLocaleString()}</p>
+                  </div>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-sm text-gray-500">Message</p>
+                  <p className="mt-1 whitespace-pre-line text-gray-900">{selectedSubmission.message}</p>
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={closeSubmissionModal}
+                    className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500">No submission selected.</p>
+            )}
+          </DialogContent>
+        </Dialog>
+
         {/* Tabs */}
         <div className="flex space-x-2 mb-6 border-b">
           <button
@@ -452,7 +510,7 @@ export default function DataPanel() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {submissions.map((submission) => (
+                    {currentSubmissions.map((submission) => (
                       <tr key={submission.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {submission.name}
@@ -489,6 +547,47 @@ export default function DataPanel() {
                     ))}
                   </tbody>
                 </table>
+                {totalPages > 1 && (
+                  <div className="border-t border-gray-200 bg-white px-4 py-4">
+                    <Pagination>
+                      <PaginationPrevious
+                        href="#"
+                        aria-disabled={currentPage === 1}
+                        className={currentPage === 1 ? 'pointer-events-none opacity-40' : ''}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (currentPage > 1) goToPage(currentPage - 1);
+                        }}
+                      />
+                      <PaginationContent>
+                        {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                          <PaginationItem key={page}>
+                            <PaginationLink
+                              href="#"
+                              isActive={page === currentPage}
+                              className={page === currentPage ? 'pointer-events-none' : ''}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (page !== currentPage) goToPage(page);
+                              }}
+                            >
+                              {page}
+                            </PaginationLink>
+                          </PaginationItem>
+                        ))}
+                      </PaginationContent>
+                      <PaginationNext
+                        href="#"
+                        aria-disabled={currentPage === totalPages}
+                        className={currentPage === totalPages ? 'pointer-events-none opacity-40' : ''}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (currentPage < totalPages) goToPage(currentPage + 1);
+                        }}
+                      />
+                    </Pagination>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -590,57 +689,6 @@ export default function DataPanel() {
                     </button>
                   </div>
                 </form>
-              </DialogContent>
-            </Dialog>
-
-            <Dialog open={submissionModalOpen} onOpenChange={(open) => {
-              if (!open) closeSubmissionModal();
-              else setSubmissionModalOpen(true);
-            }}>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Submission Details</DialogTitle>
-                  <DialogDescription>
-                    Review the full form submission details below.
-                  </DialogDescription>
-                </DialogHeader>
-                {selectedSubmission ? (
-                  <div className="space-y-4">
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="rounded-lg bg-gray-50 p-4">
-                        <p className="text-sm text-gray-500">Name</p>
-                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.name}</p>
-                      </div>
-                      <div className="rounded-lg bg-gray-50 p-4">
-                        <p className="text-sm text-gray-500">Email</p>
-                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.email}</p>
-                      </div>
-                      <div className="rounded-lg bg-gray-50 p-4">
-                        <p className="text-sm text-gray-500">Phone</p>
-                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.phone || 'N/A'}</p>
-                      </div>
-                      <div className="rounded-lg bg-gray-50 p-4">
-                        <p className="text-sm text-gray-500">Submitted</p>
-                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.timestamp?.toDate().toLocaleString()}</p>
-                      </div>
-                    </div>
-                    <div className="rounded-lg bg-gray-50 p-4">
-                      <p className="text-sm text-gray-500">Message</p>
-                      <p className="mt-1 whitespace-pre-line text-gray-900">{selectedSubmission.message}</p>
-                    </div>
-                    <div className="flex justify-end">
-                      <button
-                        type="button"
-                        onClick={closeSubmissionModal}
-                        className="flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                      >
-                        <X className="w-4 h-4 mr-1" />
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <p className="text-sm text-gray-500">No submission selected.</p>
-                )}
               </DialogContent>
             </Dialog>
 

@@ -7,6 +7,7 @@ import { Link as LinkIcon, Share2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { db } from '@/lib/firebase'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export interface Notice {
   id: string
@@ -30,7 +31,7 @@ export default function NoticeBoard() {
   const pageSize = 5
   const cacheTtlMs = 1000 * 60 * 10 // 10 minutes
 
-  const saveCache = (items: Notice[], lastDate: Date | null, more: boolean) => {
+  const saveCache = useCallback((items: Notice[], lastDate: Date | null, more: boolean) => {
     try {
       localStorage.setItem(
         cacheKey,
@@ -47,9 +48,9 @@ export default function NoticeBoard() {
     } catch (error) {
       console.error('Unable to save notice cache', error)
     }
-  }
+  }, [cacheKey])
 
-  const loadInitialNotices = async () => {
+  const loadInitialNotices = useCallback(async () => {
     setIsLoading(true)
     try {
       const q = query(collection(db, 'notices'), orderBy('createdAt', 'desc'), limit(pageSize))
@@ -75,7 +76,7 @@ export default function NoticeBoard() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [pageSize, saveCache])
 
   const loadMoreNotices = useCallback(async () => {
     if (loadingMore || !hasMore || !lastCreatedAt) return
@@ -112,7 +113,7 @@ export default function NoticeBoard() {
     } finally {
       setLoadingMore(false)
     }
-  }, [hasMore, lastCreatedAt, loadingMore])
+  }, [hasMore, lastCreatedAt, loadingMore, saveCache])
 
   useEffect(() => {
     const cached = localStorage.getItem(cacheKey)
@@ -135,7 +136,7 @@ export default function NoticeBoard() {
       }
     }
     loadInitialNotices()
-  }, [])
+  }, [cacheKey, cacheTtlMs, loadInitialNotices])
 
   useEffect(() => {
     if (!sentinelRef.current || isLoading || !hasMore) return
@@ -181,11 +182,37 @@ export default function NoticeBoard() {
     }
   }
 
-  if (isLoading) return <div className="p-4 text-center">Loading notices...</div>
+  if (isLoading) {
+    return (
+      <div className="w-full px-4 py-8 overflow-x-hidden">
+        <Card className="w-full max-w-6xl mx-auto">
+          <CardHeader className="bg-blue-50 dark:bg-blue-900/20 rounded-t-lg border-b p-4">
+            <Skeleton className="h-6 w-40 mx-auto" />
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <div key={index} className="p-4 space-y-3">
+                  <Skeleton className="h-4 w-2/3" />
+                  <Skeleton className="h-3 w-full" />
+                  <Skeleton className="h-3 w-5/6" />
+                  <div className="flex items-center justify-between">
+                    <Skeleton className="h-3 w-24" />
+                    <Skeleton className="h-8 w-16" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
   if (notices.length === 0) return null
 
   return (
-    <div className="w-full px-4 py-8 overflow-x-hidden">
+    <div className="w-full px-0 md:px-4 py-8 overflow-x-hidden">
       <Card className="w-full max-w-6xl mx-auto">
         <CardHeader className="bg-blue-50 dark:bg-blue-900/20 rounded-t-lg border-b">
           <CardTitle className="text-xl font-bold text-center">Notice Board</CardTitle>
@@ -219,7 +246,7 @@ export default function NoticeBoard() {
                         target={notice.link.startsWith('http') ? '_blank' : '_self'}
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="mt-2 inline-flex items-center gap-1 text-blue-700 dark:text-blue-300 underline decoration-2 underline-offset-4 font-medium break-all"
+                        className="mt-2 inline-flex items-center gap-1 text-blue-700 dark:text-blue-300 font-medium break-all"
                       >
                         <LinkIcon className="h-4 w-4" />
                         Visit Now
@@ -236,18 +263,20 @@ export default function NoticeBoard() {
                         e.stopPropagation()
                         handleShare(notice)
                       }}
-                      className="inline-flex items-center gap-1 text-blue-700 dark:text-blue-300 text-xs border border-blue-200 dark:border-blue-800 px-2 py-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                      className="inline-flex items-center gap-1 text-blue-700 dark:text-blue-300 text-xs p-1 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
                     >
                       <Share2 className="h-3 w-3" />
-                      {sharingId === notice.id ? 'Sharing…' : 'Share'}
                     </button>
                   </div>
                 </div>
               </div>
             ))}
-            <div ref={sentinelRef} className="h-6" />
             {loadingMore && (
-              <div className="p-4 text-center text-sm text-gray-500">Loading more notices…</div>
+              <div className="p-4 space-y-3 border-t border-gray-200 dark:border-gray-700">
+                <Skeleton className="h-4 w-2/3" />
+                <Skeleton className="h-3 w-full" />
+                <Skeleton className="h-3 w-5/6" />
+              </div>
             )}
             {!hasMore && (
               <div className="p-4 text-center text-sm text-gray-500">All notices loaded.</div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail } from 'lucide-react';
+import { ArrowLeftIcon, Mail, MessageCircle, MessageCircleMore, Wheat } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
@@ -17,9 +17,9 @@ export default function DeveloperInfo() {
         className="mb-4 rounded-full border"
 
       />
-      
+
       <h1 className="text-3xl font-bold mb-4">Contact Information</h1>
-      
+
       <div className="space-y-4">
         {/* Email */}
         <Button
@@ -35,18 +35,20 @@ export default function DeveloperInfo() {
           variant="outline"
           className="w-full"
           onClick={() => window.location.href = 'https://wa.me/917905325078'}
-          
+
         >
+          <MessageCircleMore className="h-5 w-5 mr-2" />
           WhatsApp Business
         </Button>
 
-        {/* Instagram */}
+        {/* Home */}
         <Button
           variant="outline"
           className="w-full"
-          onClick={() => window.location.href = 'https://www.instagram.com/yasir.arafaat1/'}
+          onClick={() => window.location.href = '/'}
         >
-          Instagram
+          <ArrowLeftIcon className="h-5 w-5 mr-2" />
+          Back to Home
         </Button>
       </div>
     </div>

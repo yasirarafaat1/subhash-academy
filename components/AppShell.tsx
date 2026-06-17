@@ -7,7 +7,7 @@ import NoticePushAuto from '@/components/NoticePushAuto'
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
-    const isAdminPage = pathname === '/dataPanel'
+    const isAdminPage = pathname === '/dataPanel' || pathname === '/developer-info'
 
     return (
         <div className="flex min-h-screen flex-col">

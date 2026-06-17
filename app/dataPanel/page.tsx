@@ -142,6 +142,42 @@ export default function DataPanel() {
     }
   };
 
+  const chunkArray = <T,>(arr: T[], size: number): T[][] => {
+    const chunks: T[][] = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+  };
+
+  const sendNoticePush = async (payload: { title: string; content: string; link?: string | null }) => {
+    try {
+      const snapshot = await getDocs(collection(db, 'fcmTokens'));
+      const tokens = snapshot.docs.map((doc) => doc.id);
+      if (tokens.length === 0) return;
+
+      const batches = chunkArray(tokens, 900);
+      await Promise.all(
+        batches.map((batch) =>
+          fetch('/api/notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              tokens: batch,
+              title: payload.title,
+              body: payload.content,
+              link: payload.link || window.location.origin,
+            }),
+          })
+        )
+      );
+      toast.success('Subscribers notified');
+    } catch (error) {
+      console.error('Error sending push notifications:', error);
+      toast.error('Notice added, but push notification failed');
+    }
+  };
+
   // Handle form submission for new notice
   const handleNoticeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,6 +193,11 @@ export default function DataPanel() {
         createdAt: Timestamp.now()
       });
       toast.success('Notice added successfully');
+      await sendNoticePush({
+        title: newNotice.title,
+        content: newNotice.content,
+        link: newNotice.link?.trim() || null,
+      });
       setNewNotice({ title: '', content: '', link: '', isImportant: false });
     } catch (error) {
       console.error('Error adding notice:', error);

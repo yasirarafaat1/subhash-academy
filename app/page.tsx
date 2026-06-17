@@ -80,7 +80,7 @@ export default function Home() {
             </div>
             <div className="relative w-full">
               <h3 className="text-2xl font-bold mb-4 text-center lg:text-left">Latest Notices</h3>
-              <div className="rounded-lg overflow-hidden shadow-xl bg-white">
+              <div className="rounded-lg overflow-hidden">
                 <NoticeBoard />
               </div>
             </div>

@@ -40,6 +40,27 @@ interface Notice {
   createdAt?: any;
 }
 
+const formatIstDateTime = (value: any) => {
+  const date = value?.toDate?.() ?? new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return '—';
+  }
+
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true,
+    timeZone: 'Asia/Kolkata',
+  });
+
+  return `${formatter.format(date).replace(',', '')} IST`;
+};
+
 export default function DataPanel() {
   const [activeTab, setActiveTab] = useState<'submissions' | 'notices'>('submissions');
   const [submissions, setSubmissions] = useState<FormSubmission[]>([]);
@@ -398,9 +419,9 @@ export default function DataPanel() {
       <div className="sticky top-0 bg-blue-600 text-white p-4 shadow-md">
         <div className="flex justify-between items-center">
           <h1 className="flex items-center text-xl font-bold">
-            <LucideUserCog2  className="w-6 h-6 mr-1"/>
+            <LucideUserCog2 className="w-6 h-6 mr-1" />
             Admin Panel
-            </h1>
+          </h1>
           <button
             onClick={() => {
               localStorage.removeItem("adminPassword");
@@ -409,7 +430,7 @@ export default function DataPanel() {
             }}
             className="flex items-center px-4 py-2 bg-red-600 rounded hover:bg-red-700 text-sm"
           >
-            <LogOutIcon className="w-4 h-4 mr-1"/>
+            <LogOutIcon className="w-4 h-4 mr-1" />
             Sign Out
           </button>
         </div>
@@ -420,7 +441,7 @@ export default function DataPanel() {
           if (!open) closeSubmissionModal();
           else setSubmissionModalOpen(true);
         }}>
-          <DialogContent>
+          <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] overflow-y-auto p-4 sm:p-6">
             <DialogHeader>
               <DialogTitle>Submission Details</DialogTitle>
               <DialogDescription>
@@ -436,7 +457,7 @@ export default function DataPanel() {
                   </div>
                   <div className="rounded-lg bg-gray-50 p-4">
                     <p className="text-sm text-gray-500">Email</p>
-                    <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.email}</p>
+                    <p className="mt-1 break-all text-base font-medium text-gray-900">{selectedSubmission.email}</p>
                   </div>
                   <div className="rounded-lg bg-gray-50 p-4">
                     <p className="text-sm text-gray-500">Phone</p>
@@ -444,21 +465,12 @@ export default function DataPanel() {
                   </div>
                   <div className="rounded-lg bg-gray-50 p-4">
                     <p className="text-sm text-gray-500">Submitted</p>
-                    <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.timestamp?.toDate().toLocaleString()}</p>
+                    <p className="mt-1 text-base font-medium text-gray-900">{formatIstDateTime(selectedSubmission.timestamp)}</p>
                   </div>
                 </div>
                 <div className="rounded-lg bg-gray-50 p-4">
                   <p className="text-sm text-gray-500">Message</p>
-                  <p className="mt-1 whitespace-pre-line text-gray-900">{selectedSubmission.message}</p>
-                </div>
-                <div className="flex justify-end">
-                  <button
-                    type="button"
-                    onClick={closeSubmissionModal}
-                    className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  >
-                    Close
-                  </button>
+                  <p className="mt-1 whitespace-pre-line break-words text-gray-900">{selectedSubmission.message}</p>
                 </div>
               </div>
             ) : (
@@ -529,7 +541,7 @@ export default function DataPanel() {
                           {submission.message}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {submission.timestamp?.toDate().toLocaleString()}
+                          {formatIstDateTime(submission.timestamp)}
                         </td>
                         <td className="flex items-center px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                           <button
@@ -727,7 +739,7 @@ export default function DataPanel() {
                           </div>
                           <p className="mt-1 text-gray-700 whitespace-pre-line">{notice.content}</p>
                           <p className="mt-2 text-xs text-gray-500">
-                            Created: {notice.createdAt?.toDate().toLocaleString()}
+                            Created: {formatIstDateTime(notice.createdAt)}
                           </p>
                         </div>
                         <div className="flex space-x-2">

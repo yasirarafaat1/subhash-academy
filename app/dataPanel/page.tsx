@@ -2,8 +2,23 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs, query, orderBy, deleteDoc, doc, addDoc, updateDoc, Timestamp } from "firebase/firestore";
 import { db } from '@/lib/firebase';
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Loader2, Plus, Trash2, Eye, EyeOff, View, Edit2, X, Save } from "lucide-react";
 import toast from "react-hot-toast";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
 const ADMIN_PASSWORD = "subhashacdmy";
 
@@ -31,13 +46,25 @@ export default function DataPanel() {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<string>('');
   const [isPasswordCorrect, setIsPasswordCorrect] = useState<boolean>(false);
-  const [newNotice, setNewNotice] = useState<Omit<Notice, 'id'>>({ 
-    title: '', 
+  const [noticeModalOpen, setNoticeModalOpen] = useState<boolean>(false);
+  const [submissionModalOpen, setSubmissionModalOpen] = useState<boolean>(false);
+  const [editingNoticeId, setEditingNoticeId] = useState<string | null>(null);
+  const [noticeForm, setNoticeForm] = useState<Omit<Notice, 'id'>>({
+    title: '',
     content: '',
     link: '',
-    isImportant: false 
+    isImportant: false,
   });
+  const [noticeFormError, setNoticeFormError] = useState<string>('');
+  const [selectedSubmission, setSelectedSubmission] = useState<FormSubmission | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentNoticePage, setCurrentNoticePage] = useState(1);
+  const itemsPerPage = 8;
 
   // Check for stored password on component mount
   useEffect(() => {
@@ -46,6 +73,21 @@ export default function DataPanel() {
       setIsPasswordCorrect(true);
     }
   }, []);
+
+  const handleLogin = () => {
+    if (!password.trim()) {
+      setLoginError('Password is required.');
+      return;
+    }
+
+    if (password === ADMIN_PASSWORD) {
+      localStorage.setItem('adminPassword', password);
+      setIsPasswordCorrect(true);
+      setLoginError('');
+    } else {
+      setLoginError('Incorrect password. Please try again.');
+    }
+  };
 
   // Fetch data when tab changes or after successful authentication
   useEffect(() => {
@@ -97,26 +139,51 @@ export default function DataPanel() {
     }
   };
 
-  // Delete all submissions
-  const deleteAllSubmissions = async () => {
-    if (confirm("Are you sure you want to delete all entries? This cannot be undone.")) {
-      try {
-        const q = query(collection(db, "submissions"));
-        const querySnapshot = await getDocs(q);
-        
-        // Delete each document
-        const deletePromises = querySnapshot.docs.map(doc => 
-          deleteDoc(doc.ref)
-        );
-        
-        await Promise.all(deletePromises);
-        setSubmissions([]);
-        toast.success("All entries deleted successfully");
-      } catch (error) {
-        console.error("Error deleting all submissions:", error);
-        toast.error("Failed to delete all entries");
-      }
+  const filteredSubmissions = submissions.filter((submission) => {
+    const search = searchTerm.toLowerCase();
+    return (
+      submission.name.toLowerCase().includes(search) ||
+      submission.email.toLowerCase().includes(search) ||
+      submission.phone.toLowerCase().includes(search) ||
+      submission.message.toLowerCase().includes(search)
+    );
+  });
+
+  const sortedSubmissions = [...filteredSubmissions].sort((a, b) => {
+    if (sortDirection === 'asc') {
+      return a.timestamp.toMillis() - b.timestamp.toMillis();
     }
+    return b.timestamp.toMillis() - a.timestamp.toMillis();
+  });
+
+  const totalPages = Math.max(1, Math.ceil(sortedSubmissions.length / itemsPerPage));
+  const currentSubmissions = sortedSubmissions.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.min(Math.max(page, 1), totalPages));
+  };
+
+  const noticeTotalPages = Math.max(1, Math.ceil(notices.length / itemsPerPage));
+  const currentNotices = notices.slice(
+    (currentNoticePage - 1) * itemsPerPage,
+    currentNoticePage * itemsPerPage
+  );
+
+  const goToNoticePage = (page: number) => {
+    setCurrentNoticePage(Math.min(Math.max(page, 1), noticeTotalPages));
+  };
+
+  const openSubmissionModal = (submission: FormSubmission) => {
+    setSelectedSubmission(submission);
+    setSubmissionModalOpen(true);
+  };
+
+  const closeSubmissionModal = () => {
+    setSelectedSubmission(null);
+    setSubmissionModalOpen(false);
   };
 
   // Fetch notices from Firestore
@@ -134,6 +201,7 @@ export default function DataPanel() {
         createdAt: doc.data().createdAt
       })) as Notice[];
       setNotices(items);
+      setCurrentNoticePage(1);
     } catch (error) {
       console.error('Error fetching notices:', error);
       toast.error('Failed to load notices');
@@ -179,29 +247,63 @@ export default function DataPanel() {
   };
 
   // Handle form submission for new notice
+  const openAddNoticeModal = () => {
+    setEditingNoticeId(null);
+    setNoticeForm({ title: '', content: '', link: '', isImportant: false });
+    setNoticeFormError('');
+    setNoticeModalOpen(true);
+  };
+
+  const openEditNoticeModal = (notice: Notice) => {
+    setEditingNoticeId(notice.id ?? null);
+    setNoticeForm({
+      title: notice.title,
+      content: notice.content,
+      link: notice.link || '',
+      isImportant: notice.isImportant,
+    });
+    setNoticeFormError('');
+    setNoticeModalOpen(true);
+  };
+
+  const closeNoticeModal = () => {
+    setNoticeModalOpen(false);
+    setEditingNoticeId(null);
+    setNoticeFormError('');
+  };
+
   const handleNoticeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newNotice.title || !newNotice.content) {
-      toast.error('Please fill in all required fields');
+    if (!noticeForm.title.trim() || !noticeForm.content.trim()) {
+      setNoticeFormError('Title and content are required.');
       return;
     }
-    
+
     try {
-      await addDoc(collection(db, 'notices'), {
-        ...newNotice,
-        link: newNotice.link?.trim() || null,
-        createdAt: Timestamp.now()
-      });
-      toast.success('Notice added successfully');
-      await sendNoticePush({
-        title: newNotice.title,
-        content: newNotice.content,
-        link: newNotice.link?.trim() || null,
-      });
-      setNewNotice({ title: '', content: '', link: '', isImportant: false });
+      if (editingNoticeId) {
+        await updateDoc(doc(db, 'notices', editingNoticeId), {
+          ...noticeForm,
+          link: noticeForm.link?.trim() || null,
+        });
+        toast.success('Notice updated successfully');
+      } else {
+        await addDoc(collection(db, 'notices'), {
+          ...noticeForm,
+          link: noticeForm.link?.trim() || null,
+          createdAt: Timestamp.now(),
+        });
+        toast.success('Notice added successfully');
+        await sendNoticePush({
+          title: noticeForm.title,
+          content: noticeForm.content,
+          link: noticeForm.link?.trim() || null,
+        });
+      }
+      closeNoticeModal();
+      fetchNotices();
     } catch (error) {
-      console.error('Error adding notice:', error);
-      toast.error('Failed to add notice');
+      console.error('Error saving notice:', error);
+      toast.error('Failed to save notice');
     }
   };
 
@@ -241,29 +343,37 @@ export default function DataPanel() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && password === ADMIN_PASSWORD) {
-                    localStorage.setItem("adminPassword", password);
-                    setIsPasswordCorrect(true);
-                  }
-                }}
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter password"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (loginError) setLoginError('');
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleLogin();
+                    }
+                  }}
+                  className="w-full p-2 pr-10 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              {loginError && (
+                <p className="mt-2 text-sm text-red-600">{loginError}</p>
+              )}
             </div>
             <button
-              onClick={() => {
-                if (password === ADMIN_PASSWORD) {
-                  localStorage.setItem("adminPassword", password);
-                  setIsPasswordCorrect(true);
-                } else {
-                  toast.error("Incorrect password!");
-                }
-              }}
+              onClick={handleLogin}
               className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
             >
               Sign In
@@ -299,21 +409,19 @@ export default function DataPanel() {
         <div className="flex space-x-2 mb-6 border-b">
           <button
             onClick={() => setActiveTab('submissions')}
-            className={`px-4 py-2 rounded-t-lg text-sm font-medium ${
-              activeTab === 'submissions' 
-                ? 'bg-white text-blue-600 border-t border-l border-r border-gray-200' 
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
+            className={`px-4 py-2 rounded-t-lg text-sm font-medium ${activeTab === 'submissions'
+              ? 'bg-white text-blue-600 border-t border-l border-r border-gray-200'
+              : 'text-gray-600 hover:bg-gray-100'
+              }`}
           >
             Form Submissions
           </button>
           <button
             onClick={() => setActiveTab('notices')}
-            className={`px-4 py-2 rounded-t-lg text-sm font-medium ${
-              activeTab === 'notices' 
-                ? 'bg-white text-blue-600 border-t border-l border-r border-gray-200' 
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
+            className={`px-4 py-2 rounded-t-lg text-sm font-medium ${activeTab === 'notices'
+              ? 'bg-white text-blue-600 border-t border-l border-r border-gray-200'
+              : 'text-gray-600 hover:bg-gray-100'
+              }`}
           >
             Manage Notices
           </button>
@@ -321,21 +429,6 @@ export default function DataPanel() {
 
         {activeTab === 'submissions' ? (
           <div className="bg-white rounded-lg shadow overflow-hidden">
-            <div className="p-4 border-b flex justify-between items-center">
-              <h2 className="text-lg font-semibold">Form Submissions</h2>
-              <button
-                onClick={deleteAllSubmissions}
-                disabled={submissions.length === 0}
-                className={`px-3 py-1 text-sm rounded flex items-center ${
-                  submissions.length === 0
-                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                    : 'bg-red-500 hover:bg-red-600 text-white'
-                }`}
-              >
-                <Trash2 className="w-4 h-4 mr-1" />
-                Delete All
-              </button>
-            </div>
 
             {isLoading ? (
               <div className="p-8 flex justify-center">
@@ -376,7 +469,14 @@ export default function DataPanel() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {submission.timestamp?.toDate().toLocaleString()}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <td className="flex items-center px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                          <button
+                            onClick={() => openSubmissionModal(submission)}
+                            className="text-blue-600 hover:text-blue-900 flex items-center"
+                          >
+                            <Eye className="w-4 h-4 mr-1" />
+                            View
+                          </button>
                           <button
                             onClick={() => deleteSubmission(submission.id)}
                             className="text-red-600 hover:text-red-900 flex items-center"
@@ -394,76 +494,156 @@ export default function DataPanel() {
           </div>
         ) : (
           <div className="space-y-6">
-            {/* Add New Notice Form */}
             <div className="bg-white rounded-lg shadow overflow-hidden">
-              <div className="p-4 border-b">
-                <h2 className="text-lg font-semibold">Add New Notice</h2>
+              <div className="p-4 border-b flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold">Manage Notices</h2>
+                  <p className="text-sm text-gray-500">Create or edit notices from this panel.</p>
+                </div>
+                <button
+                  onClick={openAddNoticeModal}
+                  className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Add Notice
+                </button>
               </div>
-              <div className="p-6">
+            </div>
+
+            <Dialog
+              open={noticeModalOpen}
+              onOpenChange={(open) => {
+                if (!open) closeNoticeModal();
+                else setNoticeModalOpen(true);
+              }}
+            >
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>{editingNoticeId ? 'Edit Notice' : 'Add Notice'}</DialogTitle>
+                  <DialogDescription>
+                    {editingNoticeId
+                      ? 'Update the notice details below and save your changes.'
+                      : 'Create a new notice and notify subscribers if needed.'}
+                  </DialogDescription>
+                </DialogHeader>
                 <form onSubmit={handleNoticeSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Title <span className="text-red-500">*</span>
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
                     <input
                       type="text"
-                      value={newNotice.title}
-                      onChange={(e) => setNewNotice({...newNotice, title: e.target.value})}
+                      value={noticeForm.title}
+                      onChange={(e) => setNoticeForm({ ...noticeForm, title: e.target.value })}
                       className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Enter notice title"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Content <span className="text-red-500">*</span>
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
                     <textarea
-                      value={newNotice.content}
-                      onChange={(e) => setNewNotice({...newNotice, content: e.target.value})}
-                      className="w-full p-2 border rounded min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      value={noticeForm.content}
+                      onChange={(e) => setNoticeForm({ ...noticeForm, content: e.target.value })}
+                      className="w-full p-2 border rounded min-h-[120px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Enter notice content..."
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Link (optional)
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Link (optional)</label>
                     <input
                       type="url"
-                      value={newNotice.link || ''}
-                      onChange={(e) => setNewNotice({...newNotice, link: e.target.value})}
+                      value={noticeForm.link || ''}
+                      onChange={(e) => setNoticeForm({ ...noticeForm, link: e.target.value })}
                       placeholder="https://example.com"
                       className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
                     <input
-                      type="checkbox"
                       id="isImportant"
-                      checked={newNotice.isImportant}
-                      onChange={(e) => setNewNotice({...newNotice, isImportant: e.target.checked})}
-                      className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500"
+                      type="checkbox"
+                      checked={noticeForm.isImportant}
+                      onChange={(e) => setNoticeForm({ ...noticeForm, isImportant: e.target.checked })}
+                      className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     />
-                    <label htmlFor="isImportant" className="ml-2 text-sm text-gray-700">
+                    <label htmlFor="isImportant" className="text-sm text-gray-700">
                       Mark as Important
                     </label>
                   </div>
-                  <div className="flex justify-end">
+                  {noticeFormError && (
+                    <p className="text-sm text-red-600">{noticeFormError}</p>
+                  )}
+                  <div className="flex justify-end gap-2 pt-3">
+                    <button
+                      type="button"
+                      onClick={closeNoticeModal}
+                      className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    >
+                      Cancel
+                    </button>
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center"
+                      className="flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
                     >
-                      <Plus className="w-4 h-4 mr-1" />
-                      Add Notice
+                      <Save className="w-4 h-4 mr-1" />
+                      Save
                     </button>
                   </div>
                 </form>
-              </div>
-            </div>
+              </DialogContent>
+            </Dialog>
 
-            {/* Notices List */}
+            <Dialog open={submissionModalOpen} onOpenChange={(open) => {
+              if (!open) closeSubmissionModal();
+              else setSubmissionModalOpen(true);
+            }}>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Submission Details</DialogTitle>
+                  <DialogDescription>
+                    Review the full form submission details below.
+                  </DialogDescription>
+                </DialogHeader>
+                {selectedSubmission ? (
+                  <div className="space-y-4">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="rounded-lg bg-gray-50 p-4">
+                        <p className="text-sm text-gray-500">Name</p>
+                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.name}</p>
+                      </div>
+                      <div className="rounded-lg bg-gray-50 p-4">
+                        <p className="text-sm text-gray-500">Email</p>
+                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.email}</p>
+                      </div>
+                      <div className="rounded-lg bg-gray-50 p-4">
+                        <p className="text-sm text-gray-500">Phone</p>
+                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.phone || 'N/A'}</p>
+                      </div>
+                      <div className="rounded-lg bg-gray-50 p-4">
+                        <p className="text-sm text-gray-500">Submitted</p>
+                        <p className="mt-1 text-base font-medium text-gray-900">{selectedSubmission.timestamp?.toDate().toLocaleString()}</p>
+                      </div>
+                    </div>
+                    <div className="rounded-lg bg-gray-50 p-4">
+                      <p className="text-sm text-gray-500">Message</p>
+                      <p className="mt-1 whitespace-pre-line text-gray-900">{selectedSubmission.message}</p>
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        type="button"
+                        onClick={closeSubmissionModal}
+                        className="flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                      >
+                        <X className="w-4 h-4 mr-1" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500">No submission selected.</p>
+                )}
+              </DialogContent>
+            </Dialog>
+
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <div className="p-4 border-b">
                 <h2 className="text-lg font-semibold">All Notices</h2>
@@ -478,28 +658,22 @@ export default function DataPanel() {
                 </div>
               ) : (
                 <div className="divide-y divide-gray-200">
-                  {notices.map((notice) => (
-                    <div 
-                      key={notice.id} 
-                      className={`p-4 hover:bg-gray-50 ${
-                        notice.isImportant ? 'bg-yellow-50' : ''
-                      }`}
+                  {currentNotices.map((notice) => (
+                    <div
+                      key={notice.id}
+                      className={`p-4 hover:bg-gray-50 ${notice.isImportant ? 'bg-yellow-50' : ''}`}
                     >
                       <div className="flex justify-between items-start">
                         <div>
-                          <div className="flex items-center">
-                            <h3 className="text-lg font-medium">
-                              {notice.title}
-                            </h3>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-lg font-medium">{notice.title}</h3>
                             {notice.isImportant && (
-                              <span className="ml-2 px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded-full">
+                              <span className="px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 rounded-full">
                                 Important
                               </span>
                             )}
                           </div>
-                          <p className="mt-1 text-gray-700 whitespace-pre-line">
-                            {notice.content}
-                          </p>
+                          <p className="mt-1 text-gray-700 whitespace-pre-line">{notice.content}</p>
                           <p className="mt-2 text-xs text-gray-500">
                             Created: {notice.createdAt?.toDate().toLocaleString()}
                           </p>
@@ -507,14 +681,21 @@ export default function DataPanel() {
                         <div className="flex space-x-2">
                           <button
                             onClick={() => notice.id && toggleNoticeImportance(notice.id, notice.isImportant)}
-                            className={`p-1.5 rounded-full ${
-                              notice.isImportant 
-                                ? 'bg-yellow-100 text-yellow-600 hover:bg-yellow-200' 
-                                : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                            }`}
+                            className={`p-1.5 rounded-full ${notice.isImportant
+                              ? 'bg-yellow-100 text-yellow-600 hover:bg-yellow-200'
+                              : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                              }`}
                             title={notice.isImportant ? 'Mark as Normal' : 'Mark as Important'}
                           >
                             {notice.isImportant ? '★' : '☆'}
+                          </button>
+                          <button
+                            onClick={() => notice.id && openEditNoticeModal(notice)}
+                            className="flex items-center rounded-md border border-gray-300 bg-white px-3 py-1 text-sm text-gray-700 hover:bg-gray-50"
+                            title="Edit notice"
+                          >
+                            <Edit2 className="w-4 h-4 mr-1" />
+                            Edit
                           </button>
                           <button
                             onClick={() => notice.id && deleteNotice(notice.id)}
@@ -527,6 +708,47 @@ export default function DataPanel() {
                       </div>
                     </div>
                   ))}
+                </div>
+              )}
+              {noticeTotalPages > 1 && (
+                <div className="border-t border-gray-200 bg-white px-4 py-4">
+                  <Pagination>
+                    <PaginationPrevious
+                      href="#"
+                      aria-disabled={currentNoticePage === 1}
+                      className={currentNoticePage === 1 ? 'pointer-events-none opacity-40' : ''}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (currentNoticePage > 1) goToNoticePage(currentNoticePage - 1);
+                      }}
+                    />
+                    <PaginationContent>
+                      {Array.from({ length: noticeTotalPages }, (_, index) => index + 1).map((page) => (
+                        <PaginationItem key={page}>
+                          <PaginationLink
+                            href="#"
+                            isActive={page === currentNoticePage}
+                            className={page === currentNoticePage ? 'pointer-events-none' : ''}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (page !== currentNoticePage) goToNoticePage(page);
+                            }}
+                          >
+                            {page}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                    </PaginationContent>
+                    <PaginationNext
+                      href="#"
+                      aria-disabled={currentNoticePage === noticeTotalPages}
+                      className={currentNoticePage === noticeTotalPages ? 'pointer-events-none opacity-40' : ''}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (currentNoticePage < noticeTotalPages) goToNoticePage(currentNoticePage + 1);
+                      }}
+                    />
+                  </Pagination>
                 </div>
               )}
             </div>

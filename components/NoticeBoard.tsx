@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { collection, getDocs, orderBy, query, startAfter, limit } from 'firebase/firestore'
 import { format } from 'date-fns'
 import { Link as LinkIcon, Share2 } from 'lucide-react'
 import toast from 'react-hot-toast'
@@ -20,36 +20,140 @@ export interface Notice {
 export default function NoticeBoard() {
   const [notices, setNotices] = useState<Notice[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [lastCreatedAt, setLastCreatedAt] = useState<Date | null>(null)
   const [sharingId, setSharingId] = useState<string | null>(null)
+  const sentinelRef = useRef<HTMLDivElement | null>(null)
+
+  const cacheKey = 'noticeBoardCache'
+  const pageSize = 5
+  const cacheTtlMs = 1000 * 60 * 10 // 10 minutes
+
+  const saveCache = (items: Notice[], lastDate: Date | null, more: boolean) => {
+    try {
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({
+          timestamp: Date.now(),
+          notices: items.map((notice) => ({
+            ...notice,
+            createdAt: notice.createdAt.toISOString(),
+          })),
+          lastCreatedAt: lastDate?.toISOString() ?? null,
+          hasMore: more,
+        })
+      )
+    } catch (error) {
+      console.error('Unable to save notice cache', error)
+    }
+  }
+
+  const loadInitialNotices = async () => {
+    setIsLoading(true)
+    try {
+      const q = query(collection(db, 'notices'), orderBy('createdAt', 'desc'), limit(pageSize))
+      const snapshot = await getDocs(q)
+      const items = snapshot.docs.map((doc) => {
+        const data = doc.data()
+        return {
+          id: doc.id,
+          title: data.title,
+          content: data.content,
+          link: data.link || null,
+          isImportant: data.isImportant || false,
+          createdAt: data.createdAt?.toDate(),
+        } as Notice
+      })
+      setNotices(items)
+      const last = items[items.length - 1]?.createdAt ?? null
+      setLastCreatedAt(last)
+      setHasMore(snapshot.docs.length === pageSize)
+      saveCache(items, last, snapshot.docs.length === pageSize)
+    } catch (error) {
+      console.error('Error fetching notices:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const loadMoreNotices = useCallback(async () => {
+    if (loadingMore || !hasMore || !lastCreatedAt) return
+    setLoadingMore(true)
+
+    try {
+      const q = query(
+        collection(db, 'notices'),
+        orderBy('createdAt', 'desc'),
+        startAfter(lastCreatedAt),
+        limit(pageSize)
+      )
+      const snapshot = await getDocs(q)
+      const items = snapshot.docs.map((doc) => {
+        const data = doc.data()
+        return {
+          id: doc.id,
+          title: data.title,
+          content: data.content,
+          link: data.link || null,
+          isImportant: data.isImportant || false,
+          createdAt: data.createdAt?.toDate(),
+        } as Notice
+      })
+      setNotices((current) => {
+        const updated = [...current, ...items]
+        saveCache(updated, items[items.length - 1]?.createdAt ?? lastCreatedAt, snapshot.docs.length === pageSize)
+        return updated
+      })
+      setLastCreatedAt(items[items.length - 1]?.createdAt ?? lastCreatedAt)
+      setHasMore(snapshot.docs.length === pageSize)
+    } catch (error) {
+      console.error('Error loading more notices:', error)
+    } finally {
+      setLoadingMore(false)
+    }
+  }, [hasMore, lastCreatedAt, loadingMore])
 
   useEffect(() => {
-    const q = query(collection(db, 'notices'), orderBy('createdAt', 'desc'))
-
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const items = snapshot.docs.map((doc) => {
-          const data = doc.data()
-          return {
-            id: doc.id,
-            title: data.title,
-            content: data.content,
-            link: data.link || null,
-            isImportant: data.isImportant || false,
-            createdAt: data.createdAt?.toDate(),
-          } as Notice
-        })
-        setNotices(items)
-        setIsLoading(false)
-      },
-      (error) => {
-        console.error('Error fetching notices:', error)
-        setIsLoading(false)
+    const cached = localStorage.getItem(cacheKey)
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached)
+        if (Date.now() - parsed.timestamp < cacheTtlMs) {
+          const cachedNotices = (parsed.notices || []).map((notice: any) => ({
+            ...notice,
+            createdAt: new Date(notice.createdAt),
+          })) as Notice[]
+          setNotices(cachedNotices)
+          setLastCreatedAt(parsed.lastCreatedAt ? new Date(parsed.lastCreatedAt) : cachedNotices[cachedNotices.length - 1]?.createdAt ?? null)
+          setHasMore(parsed.hasMore ?? true)
+          setIsLoading(false)
+          return
+        }
+      } catch (error) {
+        console.error('Invalid notice cache format', error)
       }
+    }
+    loadInitialNotices()
+  }, [])
+
+  useEffect(() => {
+    if (!sentinelRef.current || isLoading || !hasMore) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          loadMoreNotices()
+        }
+      },
+      { rootMargin: '200px' }
     )
 
-    return () => unsubscribe()
-  }, [])
+    observer.observe(sentinelRef.current)
+    return () => {
+      observer.disconnect()
+    }
+  }, [hasMore, isLoading, loadMoreNotices])
 
   const handleShare = async (notice: Notice) => {
     if (typeof window === 'undefined') return
@@ -100,11 +204,9 @@ export default function NoticeBoard() {
                     window.location.href = notice.link
                   }
                 }}
-                className={`p-4 transition-all ${
-                  notice.isImportant ? 'bg-yellow-50 dark:bg-yellow-900/20' : ''
-                } ${
-                  notice.link ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/30' : 'cursor-default'
-                }`}
+                className={`p-4 transition-all ${notice.isImportant ? 'bg-yellow-50 dark:bg-yellow-900/20' : ''
+                  } ${notice.link ? 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/30' : 'cursor-default'
+                  }`}
                 style={{ minHeight: '80px' }}
               >
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
@@ -120,7 +222,7 @@ export default function NoticeBoard() {
                         className="mt-2 inline-flex items-center gap-1 text-blue-700 dark:text-blue-300 underline decoration-2 underline-offset-4 font-medium break-all"
                       >
                         <LinkIcon className="h-4 w-4" />
-                        {notice.link}
+                        Visit Now
                       </a>
                     )}
                   </div>
@@ -143,6 +245,13 @@ export default function NoticeBoard() {
                 </div>
               </div>
             ))}
+            <div ref={sentinelRef} className="h-6" />
+            {loadingMore && (
+              <div className="p-4 text-center text-sm text-gray-500">Loading more notices…</div>
+            )}
+            {!hasMore && (
+              <div className="p-4 text-center text-sm text-gray-500">All notices loaded.</div>
+            )}
           </div>
         </CardContent>
       </Card>

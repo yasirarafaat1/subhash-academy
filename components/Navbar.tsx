@@ -4,18 +4,16 @@ import { ThemeProvider } from 'next-themes';
 import Image from 'next/image';
 
 import {
-  School,
   Menu,
   X,
   ChevronDown,
-  Home,
   Info,
   Image as ImageIcon,
   BookOpen,
-  Building,
   FileText,
   User,
-  Phone
+  Building2,
+  NotebookText
 } from 'lucide-react';
 
 
@@ -26,7 +24,6 @@ const courses = [
 ];
 
 const navItems = [
-  { name: "Home", href: "/", icon: <Home className="h-4 w-4 mr-1" /> },
   { name: "About Us", href: "/about", icon: <Info className="h-4 w-4 mr-1" /> },
   {
     name: "Courses",
@@ -38,8 +35,9 @@ const navItems = [
       href: `/courses/${course.slug}`
     }))
   },
+  { name: "Infrastructure", href: "/infrastructure", icon: <Building2 className="h-4 w-4 mr-1" /> },
   { name: "Gallery", href: "/gallery", icon: <ImageIcon className="h-4 w-4 mr-1" /> },
-  { name: "Admission Enquiry", href: "/admission-enquiry", icon: <FileText className="h-4 w-4 mr-1" /> },
+  { name: "Admission Enquiry", href: "/admission-enquiry", icon: <NotebookText className="h-4 w-4 mr-1" /> },
   { name: "Results", href: "https://mcu.ac.in", icon: <FileText className="h-4 w-4 mr-1" />, target: "_blank", rel: "noopener noreferrer" },
   { name: "Admin", href: "/dataPanel", icon: <User className="h-4 w-4 mr-1" /> },
 ];
